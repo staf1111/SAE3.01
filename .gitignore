@@ -1,0 +1,9 @@
+# Identifiants de connexion à la BDD (propres à chacun)
+config.php
+
+# Paramètres perso de l'éditeur
+.vscode/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
