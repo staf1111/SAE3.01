@@ -1,0 +1,19 @@
+.marque {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.marque-titre {
+    color: #1f2a44;      /* bleu marine */
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.marque-sous-titre {
+    color: #6b7280;      /* gris */
+    font-size: 0.8rem;
+}
