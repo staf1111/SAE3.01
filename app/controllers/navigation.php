@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Configuration de la navigation, un menu par rôle.
  * Fichier : app/controllers/navigation.php

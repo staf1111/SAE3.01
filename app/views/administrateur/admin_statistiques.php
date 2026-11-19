@@ -1,3 +1,9 @@
+<?php
+$stats             = $stats ?? [];
+$connexionsParJour = $connexionsParJour ?? []; //valeurs par défault provisoir pour éviter que vscode ne mettents des erreurs
+$comptesParRole    = $comptesParRole ?? [];
+?>
+
 <link rel="stylesheet" href="css/administrateur_css/statistiques.css">
 
 <div class="entete-stats">
@@ -17,4 +23,67 @@
             Exporter
         </span>
     </div>
+</div>
+
+<div class="cartes-stats">
+    <div class="carte-stat">
+        <span class="carte-label">Comptes actifs</span>
+        <span class="carte-valeur"><?= number_format($stats['comptes_actifs'], 0, ',', ' ') ?></span>
+        <span class="carte-info vert"> <?= $stats['nouveaux_mois'] ?> ce mois</span>
+    </div>
+
+    <div class="carte-stat">
+        <span class="carte-label">Connexions aujourd'hui</span>
+        <span class="carte-valeur"><?= $stats['connexions_jour'] ?></span>
+        <span class="carte-info">moyenne : <?= $stats['moyenne_jour'] ?> / jour</span>
+    </div>
+
+    <div class="carte-stat">
+        <span class="carte-label">Échecs de connexion (24 h)</span>
+        <span class="carte-valeur"><?= $stats['echecs_24h'] ?></span>
+        <span class="carte-info rouge"><?= $stats['comptes_bloques'] ?> comptes bloqués</span>
+    </div>
+
+    <div class="carte-stat">
+        <span class="carte-label">Données à anonymiser (RGPD)</span>
+        <span class="carte-valeur"><?= $stats['a_anonymiser'] ?></span>
+        <span class="carte-info orange">à traiter</span>
+    </div>
+</div>
+
+
+<?php
+$maxJour  = max($connexionsParJour);
+$maxRole  = max($comptesParRole);
+?>
+<div class="graphiques">
+
+    <!-- Connexions par jour -->
+    <div class="panneau">
+        <h2 class="panneau-titre">Connexions par jour</h2>
+        <div class="diagramme">
+            <?php foreach ($connexionsParJour as $jour => $nombre): ?>
+                <div class="colonne">
+                    <span class="colonne-valeur"><?= $nombre ?></span>
+                    <div class="barre" style="height: <?= round($nombre / $maxJour * 100) ?>%;"></div>
+                    <span class="colonne-jour"><?= $jour ?></span>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+
+    <div class="panneau">
+        <h2 class="panneau-titre">Comptes par rôle</h2>
+        <?php foreach ($comptesParRole as $role => $nombre): ?>
+            <div class="ligne-role">
+                <span class="role-nom"><?= htmlspecialchars($role) ?></span>
+                <div class="jauge">
+                    <div class="jauge-remplie" style="width: <?= round($nombre / $maxRole * 100) ?>%;"></div>
+                </div>
+                <span class="role-nombre"><?= number_format($nombre, 0, ',', ' ') ?></span>
+            </div>
+        <?php endforeach; ?>
+    </div>
+
 </div>
