@@ -2,18 +2,279 @@
     position: absolute;
     top: 20px;
     left: 24px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px 8px 8px;
+    background-color: #fff;
+    border-radius: 12px;
+}
+
+.marque-logo {
+    width: 32px;
+    height: 32px;
+}
+
+.marque-textes {
     display: flex;
     flex-direction: column;
     line-height: 1.2;
 }
 
 .marque-titre {
-    color: #1f2a44;      /* bleu marine */
+    color: #1E3578;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
 }
 
 .marque-sous-titre {
-    color: #6b7280;      /* gris */
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+
+.langue {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.langue-connexion {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    color: #141B34;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid #E2E5EE;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.night {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    box-sizing: border-box;
+    border: 1px solid #E2E5EE;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.icone,
+.icone-night {
+    width: 16px;
+    height: 16px;
+}
+
+.icone-fleche {
+    width: 12px;
+    height: 12px;
+}
+
+
+.panneau-gauche {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100vh;
+    padding: 0 48px 80px 48px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;    
+    background: #E6442F;
+    overflow: hidden;           
+}
+
+.ellipse {
+    position: absolute;
+    right: -120px;
+    bottom: -120px;
+    width: 420px;
+    pointer-events: none;
+}
+
+.Textes-connexion {
+    position: relative;
+    z-index: 1;                
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 520px;
+}
+
+.Textes-exp {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.Sous-textes {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+
+.panneau-droit {
+    margin-left: 50%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.carte-connexion {
+    width: 100%;
+    max-width: 380px;
+}
+
+.titre-connexion {
+    margin: 0 0 8px;
+    color: #141B34;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.sous-titre-connexion {
+    margin: 0 0 16px;
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.bouton-cas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 40px;
+    background: #1E3578;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+
+.separateur {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0;
+    color: #9ca3af;
+    font-size: 0.75rem;
+}
+
+.separateur::before,
+.separateur::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #E2E5EE;
+}
+
+
+.panneau-droit form {
+    display: flex;
+    flex-direction: column;
+}
+
+.panneau-droit label {
+    margin: 12px 0 6px;
+    color: #141B34;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.champ {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 12px;
+    background: #F5F6F8;
+    border: 1px solid #E2E5EE;
+    border-radius: 8px;
+}
+
+.champ:focus-within {
+    border-color: #1E3578;
+    background: #fff;
+}
+
+.champ input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.85rem;
+}
+
+.oeil {
+    cursor: pointer;
+}
+
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0;
+}
+
+.panneau-droit .souvenir {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.lien-rouge {
+    color: #E6442F;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.bouton-connexion {
+    height: 42px;
+    background: #E6442F;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.bouton-connexion:hover {
+    background: #cf3a26;
+}
+
+.pied-connexion {
+    margin-top: 18px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+.erreur {
+    color: #E6442F;
     font-size: 0.8rem;
 }
