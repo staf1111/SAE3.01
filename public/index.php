@@ -50,6 +50,17 @@ $historique = [
     <title>Accueil</title>
 </head>
 <body>
-    <?php require __DIR__ . '/../app/views/participant/Accueil.php'; ?>
+<?php
+    session_start();
+
+    define('BASE_URL', '/SAE3.01/public'); // XAMPP
+
+//TEST uniquement : simule un utilisateur connecté (participant, enseignant ou admin).
+    $_SESSION['role'] = 'participant';
+
+    require_once __DIR__ . '/../app/controllers/ParticipantController.php';
+
+    (new ParticipantController())->accueil();
+?>
 </body>
 </html>
