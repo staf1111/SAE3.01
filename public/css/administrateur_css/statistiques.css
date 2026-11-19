@@ -1,0 +1,65 @@
+
+.entete-stats {
+    display: flex;
+    justify-content: space-between;   
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.titre-stats {
+    margin: 0;
+    color: #1E3578;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.sous-titre-stats {
+    margin: 4px 0 0;
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+
+.duree {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.derniers-jours,
+.exporter {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.derniers-jours {
+    background: #fff;
+    color: #141B34;
+    border: 1px solid #E2E5EE;
+}
+
+.exporter {
+    background: #fff;
+    color: #1E3578;
+    border: 1.5px solid #1E3578;
+}
+
+
+
+.icone-fleche {
+    width: 12px;
+    height: 12px;
+}
+
+.icone-export {
+    width: 16px;
+    height: 16px;
+}
