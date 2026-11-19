@@ -1,0 +1,113 @@
+:root {
+  --navy: #1b2f73;
+  --accent: #e8412c;
+  --white: #ffffff;
+  --text-nav: #e6ebff;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  background: #f3f5fa;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 32px;
+  height: 64px;
+  background: var(--navy);
+}
+
+/* Logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 18px 6px 8px;
+  background: var(--white);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--navy);
+}
+.brand-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+.brand-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+/* Liens */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  color: var(--text-nav);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s;
+}
+.nav-link:hover { background: rgba(255, 255, 255, .1); }
+.nav-link:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.nav-link svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.nav-link[aria-current="page"] {
+  background: var(--accent);
+  color: var(--white);
+}
+
+.badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Bouton déconnexion */
+.logout {
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--navy);
+  font: 700 12px "Plus Jakarta Sans", system-ui, sans-serif;
+  text-decoration: none;
+}
+.logout:hover { background: #eef1fb; }
+.logout:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+@media (max-width: 900px) {
+  .navbar { flex-wrap: wrap; height: auto; padding: 12px 16px; }
+  .navbar nav { order: 3; width: 100%; overflow-x: auto; }
+}
