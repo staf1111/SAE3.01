@@ -1,110 +1,137 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Participant Accueil</title>
-    <link rel="stylesheet" href="css/participant/accueil.css">
-</head>
-<body>
+<?php
+/*
+ * Vue : Accueil du participant
+ *
+ * Variables attendues (définies dans index.php, plus tard dans le contrôleur) :
+ *   $participant        -> ['prenom' => ..., 'nom' => ...]
+ *   $langue             -> 'Français'
+ *   $projets            -> liste de projets ouverts
+ *   $prochainsCreneaux  -> liste des créneaux réservés
+ *   $historique         -> liste des participations passées
+ */
+?>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/participant/accueil.css">
 
-    <!-- NAVBAR : à ajouter ici quand elle sera prête -->
+<!-- NAVBAR : à ajouter ici quand elle sera prête -->
+<!-- <?php // require __DIR__ . '/../navbar.php'; ?> -->
 
-    <header>
+<div class="page">
+
+    <!-- ========== EN-TÊTE DE PAGE ========== -->
+    <header class="page-header">
         <div>
             <h1>Accueil</h1>
-            <!-- CHANGE : nom du participant connecté -->
-            <p>Participant Léa Bernard</p>
+            <p class="page-sous-titre">
+                Participant <?= htmlspecialchars($participant['prenom'] . ' ' . $participant['nom']) ?>
+            </p>
         </div>
-        <div>
-            <select>
-                <option>Français</option>
-                <option>English</option>
-            </select>
-            <button type="button">o</button>
+
+        <!-- Les 2 boutons : langue + mode sombre -->
+        <div class="langue">
+            <button type="button" class="langue-connexion">
+                <img src="images/globe.png" alt="" class="icone">
+                <?= htmlspecialchars($langue) ?>
+                <img src="images/fleche.png" alt="" class="icone-fleche">
+            </button>
+
+            <button type="button" class="night" aria-label="Mode sombre">
+                <img src="images/dark.png" alt="" class="icone-night">
+            </button>
         </div>
     </header>
 
     <main>
-        <div class="contenu">
+        <div class="accueil-layout">
 
+            <!-- ========== NOUVEAUX PROJETS ========== -->
             <section id="NewProjet">
-                <h2>Nouveaux projet ouvert pour vous</h2>
+                <div class="section-entete">
+                    <h2>Nouveaux projet ouvert pour vous</h2>
 
-                <div class="filtres">
-                    <!-- CHANGE : le nombre = nombre de projets -->
-                    <button type="button">Toutes (4)</button>
-                    <button type="button">&lt; 30 min</button>
-                    <button type="button">Filtres</button>
+                    <div class="filtres">
+                        <button type="button" class="filtre actif">Toutes (<?= count($projets) ?>)</button>
+                        <button type="button" class="filtre">&lt; 30 min</button>
+                        <button type="button" class="filtre">Filtres</button>
+                    </div>
                 </div>
 
                 <div class="cartes">
+                    <?php foreach ($projets as $projet): ?>
+                        <article class="carte-projet">
+                            <div class="carte-entete">
+                                <span class="carte-icone">
+                                    <img src="images/fiole.png" alt="">
+                                </span>
+                                <h3><?= htmlspecialchars($projet['titre']) ?></h3>
+                            </div>
 
-                    <article class="carte-projet">
-                        <h3>Perception des couleurs en réalité virtuelle</h3> <!-- CHANGE : titre -->
-                        <p>Évaluation de couleurs à l'aide d'un casque</p>       <!-- CHANGE : description -->
-                        <p>45 min</p>                                            <!-- CHANGE : durée -->
-                        <p>Prochain créneau : <strong>Auj. 14:00 · Salle B-104</strong></p> <!-- CHANGE : créneau -->
-                        <button type="button">S'inscrire</button>
-                    </article>
+                            <p class="carte-description"><?= htmlspecialchars($projet['description']) ?></p>
 
-                    <article class="carte-projet">
-                        <h3>Perception des couleurs en réalité virtuelle</h3>
-                        <p>Évaluation de couleurs à l'aide d'un casque</p>
-                        <p>45 min</p>
-                        <p>Prochain créneau : <strong>Auj. 14:00 · Salle B-104</strong></p>
-                        <button type="button">S'inscrire</button>
-                    </article>
+                            <p class="carte-duree"><?= (int) $projet['duree'] ?> min</p>
 
+                            <p class="carte-creneau">
+                                <img src="images/horloge.png" alt="" class="icone-petite">
+                                Prochain créneau : <strong><?= htmlspecialchars($projet['creneau']) ?></strong>
+                            </p>
+
+                            <!-- À faire plus tard : envoyer $projet['id'] pour l'inscription -->
+                            <button type="button" class="btn-primaire">S'inscrire</button>
+                        </article>
+                    <?php endforeach; ?>
                 </div>
             </section>
 
-            <aside id="Creneaux">
+            <!-- ========== MES PROCHAINS CRÉNEAUX ========== -->
+            <aside id="ProchainsCreneaux">
                 <h2>Mes prochains créneaux</h2>
 
-                <div class="creneau">
-                    <div class="date">
-                        <strong>30</strong><br>SEPT   <!-- CHANGE : jour / mois -->
-                    </div>
-                    <div>
-                        <strong>Perception VR</strong><br>   <!-- CHANGE : titre -->
-                        10.00h salle B                       <!-- CHANGE : heure / salle -->
-                    </div>
-                </div>
-
-                <div class="creneau">
-                    <div class="date">
-                        <strong>30</strong><br>SEPT
-                    </div>
-                    <div>
-                        <strong>Perception VR</strong><br>
-                        10.00h salle B
-                    </div>
-                </div>
+                <ul class="liste-creneaux">
+                    <?php foreach ($prochainsCreneaux as $creneau): ?>
+                        <li class="creneau">
+                            <div class="creneau-date">
+                                <span class="jour"><?= htmlspecialchars($creneau['jour']) ?></span>
+                                <span class="mois"><?= htmlspecialchars($creneau['mois']) ?></span>
+                            </div>
+                            <div class="creneau-infos">
+                                <strong><?= htmlspecialchars($creneau['titre']) ?></strong>
+                                <span><?= htmlspecialchars($creneau['heure']) ?> salle <?= htmlspecialchars($creneau['salle']) ?></span>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
             </aside>
 
         </div>
 
+        <!-- ========== HISTORIQUE RÉCENT ========== -->
         <section id="Historique">
             <h2>Historique récent</h2>
 
             <table>
-                <tr>
-                    <th>Expérimentations</th>
-                    <th>Date</th>
-                    <th>Statut</th>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>Perceptions des couleurs</strong><br> <!-- CHANGE : nom -->
-                        <small>4 séances de 45 min prochainement</small> <!-- CHANGE : détail -->
-                    </td>
-                    <td>12 sept</td>                  <!-- CHANGE : date -->
-                    <td class="valide">Participation validée</td> <!-- CHANGE : statut -->
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Expérimentations</th>
+                        <th>Date</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($historique as $ligne): ?>
+                        <tr>
+                            <td>
+                                <strong><?= htmlspecialchars($ligne['titre']) ?></strong>
+                                <small><?= htmlspecialchars($ligne['detail']) ?></small>
+                            </td>
+                            <td><span class="badge-date"><?= htmlspecialchars($ligne['date']) ?></span></td>
+                            <td><span class="statut statut-valide"><?= htmlspecialchars($ligne['statut']) ?></span></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
             </table>
         </section>
     </main>
 
-</body>
-</html>
+</div>

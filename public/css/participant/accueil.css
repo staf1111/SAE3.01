@@ -1,112 +1,378 @@
+:root {
+    --bleu: #1E3578;
+    --orange: #E6442F;
+    --texte: #141B34;
+    --gris: #6b7280;
+    --gris-clair: #9ca3af;
+    --bordure: #E2E5EE;
+    --vert: #1f7a4d;
+    --ombre: 0 3px 10px rgba(20, 27, 52, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px 40px;
-    color: #1a1d3a;
+    font-family: "Montserrat", Arial, sans-serif;
+    color: var(--texte);
+    background: #fff;
 }
 
-h1, h2 {
-    color: #263275;
+h1, h2, h3, p {
+    margin: 0;
 }
 
-header {
+button {
+    font-family: inherit;
+}
+
+.page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 32px 60px;
+}
+
+.page-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 40px;
+    align-items: flex-start;
+    margin-bottom: 50px;
 }
 
-.contenu {
+.page-header h1 {
+    color: var(--bleu);
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.page-sous-titre {
+    margin-top: 4px;
+    color: var(--gris);
+    font-size: 0.8rem;
+}
+
+.langue {
     display: flex;
-    gap: 40px;
+    align-items: center;
+    gap: 8px;
 }
 
-#NewProjet {
-    flex: 1;
+.langue-connexion {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 12px;
+    background: #fff;
+    color: var(--texte);
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(20, 27, 52, 0.08);
+    cursor: pointer;
 }
 
-#Creneaux {
-    width: 250px;
+.night {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(20, 27, 52, 0.08);
+    cursor: pointer;
+}
+
+.langue-connexion:hover,
+.night:hover {
+    border-color: var(--bleu);
+}
+
+.icone,
+.icone-night {
+    width: 16px;
+    height: 16px;
+}
+
+.icone-fleche {
+    width: 12px;
+    height: 12px;
+}
+
+.accueil-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: start;
+}
+
+h2 {
+    color: var(--bleu);
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.section-entete {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 28px;
 }
 
 .filtres {
-    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
-.filtres button {
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    background: white;
-    padding: 4px 12px;
+.filtre {
+    height: 28px;
+    min-width: 60px;
+    padding: 0 14px;
+    background: #fff;
+    color: var(--texte);
+    font-size: 0.72rem;
+    font-weight: 500;
+    border: 1px solid var(--bordure);
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(20, 27, 52, 0.08);
     cursor: pointer;
 }
 
-.filtres button:first-child {
-    background: #263275;
-    color: white;
+.filtre:hover {
+    border-color: var(--bleu);
+}
+
+.filtre.actif {
+    background: var(--bleu);
+    border-color: var(--bleu);
+    color: #fff;
+    font-weight: 600;
 }
 
 .cartes {
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
 }
 
 .carte-projet {
-    flex: 1;
-    border-top: 5px solid #263275;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    padding: 20px;
+    background: #fff;
+    border-top: 5px solid var(--bleu);
+    border-radius: 8px;
+    box-shadow: var(--ombre);
 }
 
-.carte-projet h3 {
-    font-size: 15px;
+.carte-entete {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
 }
 
-.carte-projet p {
-    font-size: 12px;
-    color: #666;
+.carte-icone {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--orange);
+    border-radius: 10px;
 }
 
-.carte-projet strong {
-    color: black;
+.carte-icone img {
+    width: 20px;
+    height: 20px;
 }
 
-.carte-projet button {
-    display: block;
+.carte-entete h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.carte-description {
+    margin-bottom: 10px;
+    color: var(--gris);
+    font-size: 0.78rem;
+}
+
+.carte-duree {
+    margin-bottom: 8px;
+    color: var(--gris);
+    font-size: 0.78rem;
+}
+
+.carte-creneau {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    color: var(--gris);
+    font-size: 0.72rem;
+}
+
+.carte-creneau strong {
+    color: var(--texte);
+    font-weight: 600;
+}
+
+.icone-petite {
+    width: 14px;
+    height: 14px;
+}
+
+.btn-primaire {
+    width: 55%;
+    height: 34px;
+    margin-top: auto;
     margin-left: auto;
-    background: #263275;
-    color: white;
+    background: var(--bleu);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
     border: none;
-    border-radius: 5px;
-    padding: 8px 40px;
+    border-radius: 8px;
     cursor: pointer;
+}
+
+.btn-primaire:hover {
+    background: #162a62;
+}
+
+#ProchainsCreneaux h2 {
+    margin-bottom: 20px;
+}
+
+.liste-creneaux {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .creneau {
     display: flex;
-    gap: 15px;
-    margin-bottom: 12px;
-    font-size: 13px;
+    align-items: center;
+    gap: 16px;
 }
 
-.date {
-    text-align: center;
-    color: #263275;
+.creneau-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 36px;
+    line-height: 1.1;
+}
+
+.jour {
+    color: var(--bleu);
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.mois {
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.creneau-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.creneau-infos strong {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.creneau-infos span {
+    color: var(--gris-clair);
+    font-size: 0.75rem;
 }
 
 #Historique {
-    margin-top: 60px;
+    margin-top: 80px;
+}
+
+#Historique h2 {
+    margin-bottom: 20px;
+    color: var(--texte);
+    font-size: 1.15rem;
 }
 
 table {
+    width: 100%;
+    max-width: 800px;
     border-collapse: collapse;
 }
 
-th, td {
+th {
+    padding: 0 0 16px;
     text-align: left;
-    padding: 8px 40px 8px 0;
+    font-size: 0.75rem;
+    font-weight: 600;
 }
 
-.valide {
-    color: green;
+td {
+    padding: 8px 0;
+    vertical-align: middle;
+    border-top: 1px solid var(--bordure);
+}
+
+td strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+td small {
+    display: block;
+    margin-top: 2px;
+    color: var(--gris);
+    font-size: 0.65rem;
+}
+
+.badge-date {
+    display: inline-block;
+    padding: 4px 14px;
+    background: #fff;
+    color: var(--vert);
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(20, 27, 52, 0.18);
+}
+
+.statut {
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.statut-valide {
+    color: var(--vert);
+}
+
+@media (max-width: 900px) {
+    .page {
+        padding: 20px 16px 40px;
+    }
+
+    .accueil-layout {
+        grid-template-columns: 1fr;
+    }
 }
