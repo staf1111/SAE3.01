@@ -196,3 +196,73 @@ main {
     font-weight: 700;
     text-align: right;
 }
+
+/* ===== Tableau des échecs ===== */
+.panneau-echecs {
+    margin-top: 32px;            /* espace avec les diagrammes au-dessus */
+}
+
+.tableau-echecs {
+    width: 100%;
+    table-layout: fixed;         /* colonnes réparties sur toute la largeur */
+    border-collapse: collapse;
+}
+
+.tableau-echecs th {
+    padding: 0 12px 14px 0;
+    color: #6b7280;              /* titres de colonnes en gris */
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: left;
+    border-bottom: 1px solid #E2E5EE;
+}
+
+.tableau-echecs td {
+    padding: 18px 12px 18px 0;   /* lignes plus espacées */
+    color: #141B34;              /* contenu en noir */
+    font-size: 0.85rem;
+    border-bottom: 1px solid #E2E5EE;
+}
+
+.tableau-echecs tr:last-child td {
+    border-bottom: none;
+}
+
+.tableau-echecs .compte {
+    font-weight: 700;
+}
+
+
+.tableau-echecs th:first-child,
+.tableau-echecs td:first-child {
+    width: 30%;
+}
+
+
+.badge-etat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 999px;
+}
+
+.badge-etat::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.badge-etat.alerte {
+    background: #FDECEA;
+    color: #c0392b;
+}
+
+.badge-etat.ok {
+    background: #E7F6EC;
+    color: #15803d;
+}

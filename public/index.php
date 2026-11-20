@@ -5,44 +5,26 @@ session_start();
 
 define('BASE_URL', '/SAE3.01/public');
 
-// TEST : simule un utilisateur connecté
-$_SESSION['role'] = 'admin';   // essaie aussi 'enseignant' et 'participant'
+// TEST : simule un admin connecté (en attendant la vraie connexion)
+$_SESSION['role'] = 'admin';
 
-// Fausses données pour la page
-$stats = [
-    'comptes_actifs'   => 1284,
-    'nouveaux_mois'    => 57,
-    'connexions_jour'  => 212,
-    'moyenne_jour'     => 185,
-    'echecs_24h'       => 17,
-    'comptes_bloques'  => 2,
-    'a_anonymiser'     => 12,
+// Quel controller et quelle action ? (?c=...&a=...)
+$c = $_GET['c'] ?? 'administrateur';
+$a = $_GET['a'] ?? 'statistiques';
+
+$controleurs = [
+    'administrateur' => 'AdministrateurController',
 ];
 
-$connexionsParJour = [
-    17 => 160,
-    18 => 172,
-    19 => 60,
-    20 => 48,
-    21 => 190,
-    22 => 205,
-    23 => 198,
-    24 => 188,
-    25 => 176,
-    26 => 55,
-    27 => 41,
-    28 => 214,
-    29 => 221,
-    30 => 212,
-];
+if (!isset($controleurs[$c])) {
+    exit('Page introuvable');
+}
 
-$comptesParRole = [
-    'Participants'           => 1104,
-    'Enseignants-chercheurs' => 118,
-    'Administrateurs'        => 4,
-];
+require __DIR__ . '/../app/controllers/' . $controleurs[$c] . '.php';
+$controleur = new $controleurs[$c]();
 
-$currentPage = 'statistiques';   // onglet surligné
-$contentView = __DIR__ . '/../app/views/administrateur/admin_statistiques.php';
+if (!method_exists($controleur, $a)) {
+    exit('Page introuvable');
+}
 
-require __DIR__ . '/../app/views/layout.php';
+$controleur->$a();

@@ -2,6 +2,7 @@
 $stats             = $stats ?? [];
 $connexionsParJour = $connexionsParJour ?? []; //valeurs par défault provisoir pour éviter que vscode ne mettents des erreurs
 $comptesParRole    = $comptesParRole ?? [];
+$compte_connexion_echoue = $compte_connexion_echoue ?? [];
 ?>
 
 <link rel="stylesheet" href="css/administrateur_css/statistiques.css">
@@ -86,4 +87,38 @@ $maxRole  = max($comptesParRole);
         <?php endforeach; ?>
     </div>
 
+
+
+
+</div>
+
+<div class="panneau">
+    <h2 class="panneau-titre">Échecs de connexion récents</h2>
+
+    <table class="tableau-echecs">
+        <thead>
+            <tr>
+                <th>Compte</th>
+                <th>Adresse IP</th>
+                <th>Tentatives</th>
+                <th>Dernière tentative</th>
+                <th>État</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($compte_connexion_echoue as $email => $info): ?>
+                <tr>
+                    <td class="compte"><?= htmlspecialchars($email) ?></td>
+                    <td><?= htmlspecialchars($info['ip']) ?></td>
+                    <td><?= $info['tentatives'] ?></td>
+                    <td><?= htmlspecialchars($info['derniere_tentative']) ?></td>
+                    <td>
+                        <span class="badge-etat <?= $info['etat'] === 'OK' ? 'ok' : 'alerte' ?>">
+                            <?= htmlspecialchars($info['etat']) ?>
+                        </span>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
