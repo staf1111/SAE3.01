@@ -1,0 +1,190 @@
+/* ============================================================
+   Participant - Historique de mes participations
+   ============================================================ */
+
+:root {
+    --bleu: #1E3578;
+    --orange: #E6442F;
+    --texte: #141B34;
+    --gris: #6b7280;
+    --bordure: #E2E5EE;
+    --vert: #1f7a4d;
+    --fond: #f3f5fa;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Montserrat", Arial, sans-serif;
+    color: var(--texte);
+    background: var(--fond);
+}
+
+h1, h2, p {
+    margin: 0;
+}
+
+.page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 28px 32px 60px;
+}
+
+/* ---------- En-tête ---------- */
+.page-header {
+    margin-bottom: 24px;
+}
+
+.page-header h1 {
+    color: var(--bleu);
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.page-sous-titre {
+    margin-top: 4px;
+    color: var(--gris);
+    font-size: 0.8rem;
+}
+
+/* ---------- Statistiques (2 cases) ---------- */
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 12px;
+}
+
+/* carré orange avec l'icône */
+.stat-icone {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--orange);
+    border-radius: 10px;
+}
+
+.stat-icone img {
+    width: 20px;
+    height: 20px;
+}
+
+/* rend l'icône horloge (grise) blanche sur le fond orange */
+.icone-blanche {
+    filter: brightness(0) invert(1);
+}
+
+.stat strong {
+    display: block;
+    color: var(--bleu);
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.stat span {
+    color: var(--gris);
+    font-size: 0.72rem;
+}
+
+/* ---------- Panneau du tableau ---------- */
+.panneau {
+    padding: 20px 22px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 12px;
+}
+
+.panneau h2 {
+    margin-bottom: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 0 0 10px;
+    text-align: left;
+    color: var(--gris);
+    font-size: 0.68rem;
+    font-weight: 500;
+}
+
+td {
+    padding: 14px 0;
+    border-top: 1px solid var(--bordure);
+    font-size: 0.75rem;
+}
+
+td.exp {
+    font-weight: 700;
+}
+
+/* largeur des colonnes */
+th:nth-child(1), td:nth-child(1) { width: 50%; }
+th:nth-child(2), td:nth-child(2) { width: 22%; }
+
+/* ---------- Badges de statut ---------- */
+.statut {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border-radius: 12px;
+}
+
+.statut::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.statut-valide {
+    background: #dff3e7;
+    color: var(--vert);
+}
+
+.statut-absent {
+    background: #fde4e1;
+    color: #c0281a;
+}
+
+.statut-annule {
+    background: #eceef4;
+    color: var(--gris);
+}
+
+/* ---------- Petits écrans ---------- */
+@media (max-width: 700px) {
+    .page {
+        padding: 20px 16px 40px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+}

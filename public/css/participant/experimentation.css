@@ -1,3 +1,8 @@
+/* ============================================================
+   Chercheur - Mes expérimentations
+   (couleurs reprises de la page de connexion)
+   ============================================================ */
+
 :root {
     --bleu: #1E3578;
     --orange: #E6442F;
@@ -5,7 +10,7 @@
     --gris: #6b7280;
     --bordure: #E2E5EE;
     --vert: #1f7a4d;
-    --fond: #F3F4F8;
+    --fond: #f3f5fa;
 }
 
 * {
@@ -19,7 +24,9 @@ body {
     background: var(--fond);
 }
 
-h1, h2, p {
+h1,
+h2,
+p {
     margin: 0;
 }
 
@@ -33,6 +40,7 @@ button {
     padding: 28px 32px 60px;
 }
 
+/* ---------- En-tête de page ---------- */
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -52,6 +60,7 @@ button {
     font-size: 0.8rem;
 }
 
+/* ---------- Boutons langue + mode sombre ---------- */
 .langue {
     display: flex;
     align-items: center;
@@ -101,36 +110,53 @@ button {
     height: 12px;
 }
 
+/* ---------- Filtres ---------- */
 .filtres {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
-    margin-bottom: 24px;
+    margin: 0 0 24px;
 }
 
-.filtre {
+a.filtre,
+a.filtre:link,
+a.filtre:visited,
+a.filtre:hover,
+a.filtre:focus,
+a.filtre:active {
+    display: inline-flex !important;
+    align-items: center;
     height: 34px;
-    padding: 0 18px;
+    padding: 0 18px !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+    vertical-align: middle;
     background: #fff;
     color: var(--texte);
     font-size: 0.78rem;
     font-weight: 500;
+    text-decoration: none !important;
     border: 1px solid var(--bordure);
     border-radius: 17px;
     cursor: pointer;
 }
 
-.filtre:hover {
+a.filtre:hover {
     border-color: var(--bleu);
 }
 
-.filtre.actif {
+a.filtre.actif,
+a.filtre.actif:link,
+a.filtre.actif:visited,
+a.filtre.actif:hover {
     background: var(--bleu);
     border-color: var(--bleu);
     color: #fff;
     font-weight: 600;
 }
 
+/* ---------- Cartes ---------- */
 .cartes {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -159,6 +185,7 @@ button {
     gap: 14px;
 }
 
+/* carré orange avec la fiole */
 .carte-icone {
     flex-shrink: 0;
     display: flex;
@@ -181,6 +208,7 @@ button {
     line-height: 1.35;
 }
 
+/* ---------- Badge de statut ---------- */
 .statut {
     display: inline-flex;
     align-items: center;
@@ -192,6 +220,7 @@ button {
     border-radius: 12px;
 }
 
+/* petit point devant le statut */
 .statut::before {
     content: "";
     width: 6px;
@@ -215,6 +244,7 @@ button {
     color: var(--gris);
 }
 
+/* ---------- Progression ---------- */
 .progression {
     width: 180px;
     padding: 12px 16px;
@@ -243,6 +273,7 @@ button {
     height: 14px;
 }
 
+/* ---------- Prochain créneau ---------- */
 .carte-creneau {
     display: flex;
     align-items: center;
@@ -256,6 +287,7 @@ button {
     font-weight: 600;
 }
 
+/* ---------- Petits écrans ---------- */
 @media (max-width: 700px) {
     .page {
         padding: 20px 16px 40px;
@@ -264,4 +296,27 @@ button {
     .cartes {
         grid-template-columns: 1fr;
     }
+}
+
+/* ---------- Aucun résultat pour le filtre choisi ---------- */
+.vide {
+    padding: 30px 0;
+    color: var(--gris);
+    font-size: 0.85rem;
+}
+
+/* ---------- Les filtres sont des liens : pas de soulignement, même couleur après un clic ---------- */
+a.filtre,
+a.filtre:hover,
+a.filtre:visited {
+    text-decoration: none;
+}
+
+a.filtre:visited {
+    color: var(--texte);
+}
+
+a.filtre.actif,
+a.filtre.actif:visited {
+    color: #fff;
 }

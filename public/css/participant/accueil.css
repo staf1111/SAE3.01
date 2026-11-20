@@ -1,3 +1,8 @@
+/* ============================================================
+   Participant - Accueil
+   (couleurs reprises de la page de connexion)
+   ============================================================ */
+
 :root {
     --bleu: #1E3578;
     --orange: #E6442F;
@@ -17,7 +22,7 @@ body {
     margin: 0;
     font-family: "Montserrat", Arial, sans-serif;
     color: var(--texte);
-    background: #fff;
+    background: #f3f5fa;
 }
 
 h1, h2, h3, p {
@@ -34,6 +39,7 @@ button {
     padding: 28px 32px 60px;
 }
 
+/* ---------- En-tête de page ---------- */
 .page-header {
     display: flex;
     justify-content: space-between;
@@ -53,6 +59,7 @@ button {
     font-size: 0.8rem;
 }
 
+/* ---------- Boutons langue + mode sombre ---------- */
 .langue {
     display: flex;
     align-items: center;
@@ -104,6 +111,7 @@ button {
     height: 12px;
 }
 
+/* ---------- Mise en page : projets à gauche, créneaux à droite ---------- */
 .accueil-layout {
     display: grid;
     grid-template-columns: 1fr 300px;
@@ -117,6 +125,7 @@ h2 {
     font-weight: 800;
 }
 
+/* ---------- Filtres ---------- */
 .section-entete {
     display: flex;
     align-items: center;
@@ -156,6 +165,7 @@ h2 {
     font-weight: 600;
 }
 
+/* ---------- Cartes projets ---------- */
 .cartes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -180,6 +190,7 @@ h2 {
     margin-bottom: 14px;
 }
 
+/* carré orange avec la fiole */
 .carte-icone {
     flex-shrink: 0;
     display: flex;
@@ -251,6 +262,7 @@ h2 {
     background: #162a62;
 }
 
+/* ---------- Mes prochains créneaux ---------- */
 #ProchainsCreneaux h2 {
     margin-bottom: 20px;
 }
@@ -305,6 +317,7 @@ h2 {
     font-size: 0.75rem;
 }
 
+/* ---------- Historique récent ---------- */
 #Historique {
     margin-top: 80px;
 }
@@ -367,6 +380,7 @@ td small {
     color: var(--vert);
 }
 
+/* ---------- Petits écrans ---------- */
 @media (max-width: 900px) {
     .page {
         padding: 20px 16px 40px;
