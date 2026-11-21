@@ -1,28 +1,41 @@
 <link rel="stylesheet" href="<?= BASE_URL ?>/css/administrateur_css/parametres.css">
-<h1 class="titre-page">Paramètres</h1>
 
+<div class="entete-param">
+    <h1 class="titre-parametre">Paramètres</h1>
+</div>
 
-<div class="card-general">
-    <h2>Nom de l'application</h2>
-    <span class="nom"> </span>
-    Le Mans Université
-
-    <div class="langue-default">
-        <h2>Langue par défault </h2>
-        <span class="français">
-            français
-            <img src="images/croix.png" alt="" class="croix">
-        </span>
-        <span clas="anglais">
-            espagnol
-            <img src="images/croix.png" alt="" class="croix">
-
-        </span>
+<div class="panneau-param">
+    <div class="ligne-param">
+        <h2 class="label-param">Nom de l'application</h2>
+        <span class="nom-appli">Le Mans Université</span>
     </div>
 
-    <div class="theme-defaul">
-
+    <div class="ligne-param">
+        <h2 class="label-param">Langue par défaut</h2>
+        <div class="choix">
+            <span class="choix-item">
+                Français
+                <img src="<?= BASE_URL ?>/images/croix.png" alt="Retirer" class="croix">
+            </span>
+            <span class="choix-item">
+                Espagnol
+                <img src="<?= BASE_URL ?>/images/croix.png" alt="Retirer" class="croix">
+            </span>
+        </div>
     </div>
 
-
+    <div class="ligne-param">
+        <h2 class="label-param">Thème par défaut</h2>
+        <div class="choix">
+            <span class="choix-item">
+                <img src="<?= BASE_URL ?>/images/clair.png" alt="" class="icone-theme">
+                Clair
+            </span>
+            <span class="choix-item">
+                <img src="<?= BASE_URL ?>/images/dark.png" alt="" class="icone-theme">
+                Sombre
+            </span>
+            <span class="choix-item">Auto</span>
+        </div>
+    </div>
 </div>

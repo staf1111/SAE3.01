@@ -1,11 +1,11 @@
 <?php
 $stats             = $stats ?? [];
-$connexionsParJour = $connexionsParJour ?? []; //valeurs par défault provisoir pour éviter que vscode ne mettents des erreurs
+$connexionsParJour = $connexionsParJour ?? []; // valeurs par défaut provisoires pour éviter les erreurs de VS Code
 $comptesParRole    = $comptesParRole ?? [];
 $compte_connexion_echoue = $compte_connexion_echoue ?? [];
 ?>
 
-<link rel="stylesheet" href="css/administrateur_css/statistiques.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>/css/administrateur_css/statistiques.css">
 
 <div class="entete-stats">
     <div class="titre-bloc">
@@ -16,11 +16,11 @@ $compte_connexion_echoue = $compte_connexion_echoue ?? [];
     <div class="duree">
         <span class="derniers-jours">
             14 derniers jours
-            <img src="images/fleche.png" alt="" class="icone-fleche">
+            <img src="<?= BASE_URL ?>/images/fleche.png" alt="" class="icone-fleche">
         </span>
 
         <span class="exporter">
-            <img src="images/export.png" alt="" class="icone-export">
+            <img src="<?= BASE_URL ?>/images/export.png" alt="" class="icone-export">
             Exporter
         </span>
     </div>
@@ -92,7 +92,7 @@ $maxRole  = max($comptesParRole);
 
 </div>
 
-<div class="panneau">
+<div class="panneau panneau-echecs">
     <h2 class="panneau-titre">Échecs de connexion récents</h2>
 
     <table class="tableau-echecs">

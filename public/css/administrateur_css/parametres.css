@@ -1,0 +1,22 @@
+main {
+    padding: 32px 32px 24px;
+}
+.entete-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.titre-parametre {
+    margin: 0;
+    color: #1E3578;
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.nom-appli {
+    background: #fff;
+    color: #1E3578;
+    border: 1.5px solid #1E3578;
+}
