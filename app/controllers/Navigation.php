@@ -42,7 +42,7 @@ return [
         'dashboard'    => ['label' => 'Tableau de bord', 'href' => '#', 'icon' => $icons['home']],
         'utilisateurs' => ['label' => 'Utilisateurs',    'href' => '#', 'icon' => $icons['users']],
         'parametres'   => ['label' => 'Paramètres',   'href' => 'index.php?c=administrateur&a=parametres',   'icon' => $icons['settings']],
-        'journaux'     => ['label' => 'Journaux',        'href' => '#', 'icon' => $icons['journal']],
+        'journaux'     => ['label' => 'Journaux',        'href' => 'index.php?c=administrateur&a=journaux', 'icon' => $icons['journal']],
         'statistiques' => ['label' => 'Statistiques', 'href' => 'index.php?c=administrateur&a=statistiques', 'icon' => $icons['chart']],
     ] + $profil,
 ];
