@@ -1,0 +1,71 @@
+/* Styles communs aux pages — public/css/pages.css */
+main { max-width: 1100px; margin: 0 auto; padding: 32px 24px 64px; color: #1a1d2e; font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+h1 { color: var(--navy); font-size: 28px; font-weight: 800; }
+h2 { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+.sub { color: #6b7280; font-size: 13px; margin-top: 4px; }
+.page-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.tools { display: flex; gap: 8px; }
+.grid { display: grid; gap: 16px; margin-bottom: 16px; }
+.g2 { grid-template-columns: repeat(2, 1fr); }
+.g3 { grid-template-columns: repeat(3, 1fr); }
+.g4 { grid-template-columns: repeat(4, 1fr); }
+.g-main { grid-template-columns: 2fr 1fr; align-items: start; }
+.card { background: #fff; border: 1px solid #e5e8f0; border-radius: 14px; padding: 20px; }
+.ico { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; border: 1px solid #dfe3ee; border-radius: 8px; background: #fff; color: #444b63; font: 600 12px "Plus Jakarta Sans", system-ui, sans-serif; text-decoration: none; cursor: pointer; }
+.btn-navy { background: var(--navy); border-color: var(--navy); color: #fff; }
+.btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-danger { color: #b91c1c; }
+.pills { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.pill { padding: 7px 14px; border: 1px solid #dfe3ee; border-radius: 999px; background: #fff; font-size: 12px; font-weight: 600; }
+.pill.on { background: var(--navy); border-color: var(--navy); color: #fff; }
+
+.tag { padding: 4px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.tag-green { background: #e3f6ea; color: #15803d; }
+.tag-grey { background: #eceef4; color: #5b6275; }
+.tag-yellow { background: #fff2d6; color: #a15c07; }
+
+.bar { height: 6px; background: #e6eaf5; border-radius: 999px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--navy); border-radius: 999px; }
+.bar.green i { background: #15803d; }
+.muted { color: #6b7280; font-size: 12px; }
+.green { color: #15803d; } .red { color: #b91c1c; }
+
+/* Cartes expérimentation */
+.exp-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.exp-head h3 { flex: 1; font-size: 15px; font-weight: 700; }
+.exp-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; background: var(--accent); color: #fff; flex-shrink: 0; }
+.exp-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.box { background: #f3f5fa; border-radius: 10px; padding: 12px; }
+.box strong { display: block; font-size: 17px; color: var(--navy); margin: 4px 0 6px; }
+.exp-actions { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 8px; margin-top: 14px; }
+
+/* KPI */
+.kpi .label { font-size: 12px; color: #6b7280; }
+.kpi strong { display: block; font-size: 26px; font-weight: 800; color: var(--navy); margin: 4px 0; }
+.kpi small { font-size: 11px; }
+
+/* Barres de profil */
+.group { margin-bottom: 16px; }
+.group h3 { font-size: 12px; color: var(--navy); margin-bottom: 8px; }
+.row-bar { display: grid; grid-template-columns: 90px 1fr 40px; gap: 10px; align-items: center; font-size: 12px; margin-bottom: 8px; }
+
+/* Tableaux */
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; font-size: 12px; font-weight: 600; color: #6b7280; padding: 0 10px 12px 0; }
+td { padding: 16px 10px 16px 0; border-top: 1px solid #e5e8f0; font-weight: 600; }
+td .bar { width: 110px; display: inline-block; vertical-align: middle; margin-right: 8px; }
+
+/* Listes */
+.list-row { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid #e5e8f0; }
+.list-row:first-of-type { border-top: 0; }
+.list-row .grow { flex: 1; }
+.list-row .grow strong { display: block; font-size: 14px; }
+.date { width: 44px; padding: 6px 0; border-radius: 8px; background: #e9edf8; text-align: center; color: var(--navy); font-weight: 800; font-size: 15px; line-height: 1.1; }
+.date small { display: block; font-size: 9px; font-weight: 600; }
+.avatar { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; background: #3040e8; color: #fff; font-weight: 700; }
+
+@media (max-width: 800px) {
+  .g2, .g3, .g4, .g-main { grid-template-columns: 1fr; }
+}

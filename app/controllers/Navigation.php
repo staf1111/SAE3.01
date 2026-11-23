@@ -30,11 +30,11 @@ return [
     ] + $profil,
 
     'enseignant' => [
-        'dashboard'        => ['label' => 'Tableau de bord',  'href' => '#', 'icon' => $icons['home']],
-        'experimentations' => ['label' => 'Expérimentations', 'href' => '#', 'icon' => $icons['flask']],
-        'participants'     => ['label' => 'Participants',     'href' => '#', 'icon' => $icons['user']],
-        'creneaux'         => ['label' => 'Créneaux',         'href' => '#', 'icon' => $icons['calendar']],
-        'statistiques'     => ['label' => 'Statistiques',     'href' => '#', 'icon' => $icons['chart']],
+        'dashboard'        => ['label' => 'Tableau de bord',  'href' => BASE_URL . '/index.php?page=dashboard', 'icon' => $icons['home']],
+        'experimentations' => ['label' => 'Expérimentations', 'href' => BASE_URL . '/index.php?page=experimentations', 'icon' => $icons['flask']],
+        'participants'     => ['label' => 'Participants',     'href' => BASE_URL . '/index.php?page=participants', 'icon' => $icons['user']],
+        'creneaux'         => ['label' => 'Créneaux',         'href' => BASE_URL . '/index.php?page=creneaux', 'icon' => $icons['calendar']],
+        'statistiques'     => ['label' => 'Statistiques',     'href' => BASE_URL . '/index.php?page=statistiques', 'icon' => $icons['chart']],
     ] + $profil,
 
     'admin' => [
