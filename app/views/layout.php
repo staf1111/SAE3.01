@@ -60,6 +60,11 @@ if (!isset($badges)) {
 </header>
 
 <main>
+
+  <?php if (!empty($message)): ?>
+    <p class="flash flash-<?= $message['type'] ?>"><?= htmlspecialchars($message['texte']) ?></p>
+  <?php endif; ?>
+
   <?php
   if (!empty($contentView)) {
       require $contentView;
