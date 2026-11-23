@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$navigation = require __DIR__ . '/../controllers/navigation.php';
+$navigation = require __DIR__ . '/../controllers/Navigation.php';
 $role = $_SESSION['role'] ?? '';
 $liens = $navigation[$role] ?? [];
 
