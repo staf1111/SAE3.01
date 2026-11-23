@@ -1,0 +1,344 @@
+body {
+    background: #E8ECF7;   
+}
+main {
+    padding: 32px 32px 24px;
+}
+.entete-users {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.titre-users{
+    margin: 0;
+    color: #1E3578;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+
+
+.exporter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.exporter-csv,
+.new-users {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.exporter-csv {
+    background: #fff;
+    color: #1E3578;
+    border: 1.5px solid #1E3578;
+}
+
+.new-users {
+    background: #E6442F;
+    color: #fff;
+    border: 1.5px solid #E6442F;   
+}
+
+.icone-plus {
+    width: 16px;
+    height: 16px;
+}
+
+.filtres {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.filtre {
+    padding: 8px 16px;
+    color: #141B34;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #E2E5EE;
+    border-radius: 999px;
+}
+
+.filtre:hover {
+    background: #f5f6f8;
+}
+
+.filtre.actif {
+    background: #1E3578;
+    color: #fff;
+    font-weight: 600;
+    border-color: #1E3578;
+}
+
+body {
+    background: #E8ECF7;
+}
+
+main {
+    padding: 32px 32px 24px;
+}
+
+/* ===== En-tête ===== */
+.entete-users {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.titre-users {
+    margin: 0;
+    color: #1E3578;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+/* ===== Boutons Exporter / Créer ===== */
+.exporter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.exporter-csv,
+.new-users {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.exporter-csv {
+    background: #fff;
+    color: #1E3578;
+    border: 1.5px solid #1E3578;
+}
+
+.new-users {
+    background: #E6442F;
+    color: #fff;
+    border: 1.5px solid #E6442F;
+}
+
+.new-users:hover {
+    background: #cf3a26;
+}
+
+.icone-export,
+.icone-plus {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===== Filtres ===== */
+.filtres {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.filtre {
+    padding: 7px 14px;
+    color: #141B34;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #E2E5EE;
+    border-radius: 999px;
+}
+
+.filtre:hover {
+    background: #f5f6f8;
+}
+
+.filtre.actif {
+    color: #fff;
+    font-weight: 600;
+    background: #1E3578;
+    border-color: #1E3578;
+}
+
+/* ===== Panneau + tableau ===== */
+.panneau-users {
+    padding: 16px 20px;
+    background: #fff;
+    border: 1px solid #E2E5EE;
+    border-radius: 12px;
+}
+
+.tableau-utilisateurs {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tableau-utilisateurs th {
+    padding: 4px 12px 12px 0;
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: left;
+    border-bottom: 1px solid #E2E5EE;
+}
+
+.tableau-utilisateurs td {
+    padding: 14px 12px 14px 0;
+    color: #141B34;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #E2E5EE;
+}
+
+.nom-utilisateur {
+    display: block;
+    font-weight: 700;
+}
+
+.email-utilisateur {
+    display: block;
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+/* ===== Pastilles de rôle ===== */
+.pastille {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 999px;
+}
+
+.pastille::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+}
+
+.role-participant { color: #4b5563; background: #EEF0F4; }
+.role-enseignant  { color: #c0392b; background: #FDECEA; }
+.role-admin       { color: #1E3578; background: #E8EEFC; }
+
+/* ===== Statut ===== */
+.statut {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 999px;
+}
+
+.statut::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+}
+
+.statut.actif  { color: #15803d; background: #E7F6EC; }
+.statut.bloque { color: #c0392b; background: #FDECEA; }
+
+/* ===== Boutons modifier / supprimer ===== */
+.actions-ligne {
+    display: flex;
+    gap: 8px;
+}
+
+.bouton-icone {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border: 1px solid #E2E5EE;
+    border-radius: 8px;
+}
+
+.bouton-icone:hover {
+    background: #f5f6f8;
+}
+
+.bouton-icone.supprimer:hover {
+    background: #FDECEA;
+}
+
+.bouton-icone img {
+    width: 14px;
+    height: 14px;
+}
+
+/* ===== Pagination ===== */
+.pied-tableau {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+}
+
+.compteur {
+    color: #6b7280;
+    font-size: 0.8rem;
+}
+
+.pagination {
+    display: flex;
+    gap: 6px;
+}
+
+.page-btn {
+    display: inline-grid;
+    place-items: center;
+    min-width: 32px;
+    height: 32px;
+    padding: 0 12px;
+    color: #141B34;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    background: #fff;
+    border: 1px solid #E2E5EE;
+    border-radius: 8px;
+}
+
+.page-btn:hover {
+    background: #f5f6f8;
+}
+
+.page-btn.actif {
+    color: #fff;
+    background: #1E3578;
+    border-color: #1E3578;
+}
+
+.page-btn.desactive {
+    color: #C9CEDB;
+    cursor: default;
+}
