@@ -390,3 +390,254 @@ td small {
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================================
+   Pop-up d'inscription (sans JavaScript)
+   1) choix du créneau  2) "Demande envoyée"
+   ============================================================ */
+
+/* fenêtre commune aux 2 pop-up */
+.modale {
+    width: calc(100% - 32px);
+    max-width: 380px;
+    padding: 0;
+    overflow: hidden;
+    color: var(--texte);
+    background: #fff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(20, 27, 52, 0.3);
+}
+
+/* pop-up 1 : centrée explicitement (un reset `* { margin: 0 }` ailleurs annule le centrage automatique) */
+.modale[popover] {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    height: fit-content;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+}
+
+.modale::backdrop {
+    background: rgba(20, 27, 52, 0.55);
+}
+
+/* pop-up 2 : fond sombre posé par PHP */
+.modale-fond {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: rgba(20, 27, 52, 0.55);
+}
+
+/* bandeau bleu */
+.modale-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: var(--bleu);
+    color: #fff;
+}
+
+.modale-sur-titre {
+    font-size: 0.7rem;
+    opacity: 0.85;
+}
+
+.modale-entete h2 {
+    margin-top: 2px;
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.modale-fermer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modale-fermer:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* la croix devient blanche sur le fond bleu */
+.modale-fermer img {
+    width: 14px;
+    height: 14px;
+    filter: brightness(0) invert(1);
+}
+
+.modale-corps {
+    padding: 20px;
+}
+
+/* ----- pop-up 1 : liste des créneaux ----- */
+.modale fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.modale legend {
+    margin-bottom: 12px;
+    padding: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.option-creneau {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.option-creneau input {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--bleu);
+}
+
+.option-creneau strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.option-creneau small {
+    color: var(--gris);
+    font-size: 0.72rem;
+}
+
+/* créneau choisi : bordure bleue et fond clair (sans JavaScript) */
+.option-creneau:has(input:checked) {
+    background: #eef0fa;
+    border-color: var(--bleu);
+    box-shadow: 0 0 0 1px var(--bleu);
+}
+
+/* créneau complet */
+.option-creneau.complet {
+    background: #f1f2f6;
+    color: #a0a4b5;
+    cursor: not-allowed;
+}
+
+.option-creneau.complet small {
+    color: #a0a4b5;
+}
+
+.aucun-creneau {
+    color: var(--gris);
+    font-size: 0.8rem;
+}
+
+.consentement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0 16px;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+.consentement input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--bleu);
+}
+
+/* gros bouton du bas (orange : envoyer / bleu : voir mes créneaux) */
+.btn-envoyer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 44px;
+    background: var(--orange);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-envoyer:hover {
+    background: #cf3a26;
+}
+
+.btn-envoyer:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-envoyer.btn-bleu {
+    background: var(--bleu);
+}
+
+.btn-envoyer.btn-bleu:hover {
+    background: #162a62;
+}
+
+.icone-avion {
+    width: 16px;
+    height: 16px;
+}
+
+/* ----- pop-up 2 : demande envoyée ----- */
+.modale-succes {
+    text-align: center;
+}
+
+.succes-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin: 8px auto 16px;
+    background: #dff3e7;
+    border-radius: 50%;
+}
+
+.succes-icone img {
+    width: 26px;
+    height: 26px;
+}
+
+.modale-succes h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.modale-succes p {
+    margin: 10px 0 22px;
+    color: var(--gris);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}

@@ -18,6 +18,12 @@ $projets = [
         'description' => "Évaluation de couleurs à l'aide d'un casque",
         'duree'       => 45,
         'creneau'     => 'Auj. 14:00 · Salle B-104',
+        // créneaux proposés dans la pop-up "S'inscrire" (places = 0 : complet)
+        'creneaux'    => [
+            ['id' => 11, 'libelle' => 'Lundi 6 octobre · 10:00',     'places' => 2],
+            ['id' => 12, 'libelle' => 'Mercredi 8 octobre · 14:00',  'places' => 3],
+            ['id' => 13, 'libelle' => 'Vendredi 10 octobre · 09:30', 'places' => 0],
+        ],
     ],
     [
         'id'          => 2,
@@ -25,6 +31,11 @@ $projets = [
         'description' => 'Tâches de mémorisation sur ordinateur',
         'duree'       => 30,
         'creneau'     => 'Mer. 10:00 · Salle A-012',
+        'creneaux'    => [
+            ['id' => 21, 'libelle' => 'Lundi 13 octobre · 10:00',    'places' => 4],
+            ['id' => 22, 'libelle' => 'Mardi 14 octobre · 09:00',    'places' => 1],
+            ['id' => 23, 'libelle' => 'Jeudi 16 octobre · 11:00',    'places' => 0],
+        ],
     ],
 ];
 
@@ -81,18 +92,21 @@ $experimentations = [
 
 $creneauxAVenir = [
     [
+        'id' => 1, 'experience_id' => 1,
         'jour' => '30', 'mois' => 'SEPT.',
         'titre' => 'Perception des couleurs en réalité virtuelle',
         'debut' => '10:00', 'fin' => '10:45', 'salle' => 'B-104',
         'statut' => 'En attente de validation', 'statut_classe' => 'statut-attente',
     ],
     [
+        'id' => 2, 'experience_id' => 1,
         'jour' => '07', 'mois' => 'OCT.',
         'titre' => 'Perception des couleurs en réalité virtuelle',
         'debut' => '14:00', 'fin' => '14:45', 'salle' => 'B-104',
         'statut' => 'Confirmé', 'statut_classe' => 'statut-confirme',
     ],
     [
+        'id' => 3, 'experience_id' => 2,
         'jour' => '15', 'mois' => 'OCT.',
         'titre' => 'Mémoire de travail et bilinguisme',
         'debut' => '09:00', 'fin' => '10:00', 'salle' => 'A-012',
@@ -100,16 +114,23 @@ $creneauxAVenir = [
     ],
 ];
 
-$experienceChoisie = 'Mémoire de travail et bilinguisme';
-
+// Créneaux proposés quand on clique sur "Changer" (clé = experience_id du rendez-vous)
 // etat : libre / selectionne / reserve / complet
-$creneauxDisponibles = [
-    ['libelle' => 'Lun. 13 oct. · 10:00', 'etat' => 'libre'],
-    ['libelle' => 'Lun. 13 oct. · 14:00', 'etat' => 'selectionne'],
-    ['libelle' => 'Mar. 14 oct. · 09:00', 'etat' => 'libre'],
-    ['libelle' => 'Mer. 15 oct. · 09:00 · Déjà réservé', 'etat' => 'reserve'],
-    ['libelle' => 'Jeu. 16 oct. · 11:00 · Complet', 'etat' => 'complet'],
-    ['libelle' => 'Ven. 17 oct. · 10:00', 'etat' => 'libre'],
+$creneauxParExperience = [
+    1 => [
+        ['libelle' => 'Mar. 30 sept. · 10:00 · Déjà réservé', 'etat' => 'reserve'],
+        ['libelle' => 'Mar. 7 oct. · 14:00 · Déjà réservé',   'etat' => 'reserve'],
+        ['libelle' => 'Jeu. 9 oct. · 10:00',                  'etat' => 'libre'],
+        ['libelle' => 'Ven. 10 oct. · 09:30 · Complet',       'etat' => 'complet'],
+    ],
+    2 => [
+        ['libelle' => 'Lun. 13 oct. · 10:00', 'etat' => 'libre'],
+        ['libelle' => 'Lun. 13 oct. · 14:00', 'etat' => 'selectionne'],
+        ['libelle' => 'Mar. 14 oct. · 09:00', 'etat' => 'libre'],
+        ['libelle' => 'Mer. 15 oct. · 09:00 · Déjà réservé', 'etat' => 'reserve'],
+        ['libelle' => 'Jeu. 16 oct. · 11:00 · Complet', 'etat' => 'complet'],
+        ['libelle' => 'Ven. 17 oct. · 10:00', 'etat' => 'libre'],
+    ],
 ];
 
 $statsHistorique = [
@@ -145,6 +166,8 @@ $consentement = [
     'rappel_veille'  => true,
     'sms'            => false,
 ];
+
+
 
 session_start();
 

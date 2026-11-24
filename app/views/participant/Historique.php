@@ -6,7 +6,7 @@
  * Cette vue est chargée dans une méthode du contrôleur, donc on les
  * déclare "global" pour pouvoir les utiliser ici.
  */
-global $statsHistorique, $participations;
+global $statsHistorique, $participations, $langue;
 ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,22 @@ global $statsHistorique, $participations;
 <div class="page">
 
     <header class="page-header">
-        <h1>Historique de mes participations</h1>
-        <p class="page-sous-titre">Toutes les expérimentations auxquelles vous avez participé.</p>
+        <div>
+            <h1>Historique de mes participations</h1>
+            <p class="page-sous-titre">Toutes les expérimentations auxquelles vous avez participé.</p>
+        </div>
+
+        <div class="langue">
+            <button type="button" class="langue-connexion">
+                <img src="<?= BASE_URL ?>/images/globe.png" alt="" class="icone">
+                <?= htmlspecialchars($langue) ?>
+                <img src="<?= BASE_URL ?>/images/fleche.png" alt="" class="icone-fleche">
+            </button>
+
+            <button type="button" class="night" aria-label="Mode sombre">
+                <img src="<?= BASE_URL ?>/images/dark.png" alt="" class="icone-night">
+            </button>
+        </div>
     </header>
 
     <!-- ========== STATISTIQUES ========== -->
