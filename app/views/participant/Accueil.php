@@ -64,7 +64,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['projet_id'], 
 
         <section id="NewProjet">
             <div class="section-entete">
-                <h2>Nouveaux projet ouvert pour vous</h2>
+                <h2>Nouveau(x) projet(s) ouvert(s) pour vous</h2>
 
                 <div class="filtres">
                     <button type="button" class="filtre actif">Toutes (<?= count($projets) ?>)</button>
