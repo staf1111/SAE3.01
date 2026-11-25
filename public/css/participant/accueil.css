@@ -1,0 +1,643 @@
+/* ============================================================
+   Participant - Accueil
+   (couleurs reprises de la page de connexion)
+   ============================================================ */
+
+:root {
+    --bleu: #1E3578;
+    --orange: #E6442F;
+    --texte: #141B34;
+    --gris: #6b7280;
+    --gris-clair: #9ca3af;
+    --bordure: #E2E5EE;
+    --vert: #1f7a4d;
+    --ombre: 0 3px 10px rgba(20, 27, 52, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Montserrat", Arial, sans-serif;
+    color: var(--texte);
+    background: #f3f5fa;
+}
+
+h1, h2, h3, p {
+    margin: 0;
+}
+
+button {
+    font-family: inherit;
+}
+
+.page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 28px 32px 60px;
+}
+
+/* ---------- En-tête de page ---------- */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 50px;
+}
+
+.page-header h1 {
+    color: var(--bleu);
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.page-sous-titre {
+    margin-top: 4px;
+    color: var(--gris);
+    font-size: 0.8rem;
+}
+
+/* ---------- Boutons langue + mode sombre ---------- */
+.langue {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.langue-connexion {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 12px;
+    background: #fff;
+    color: var(--texte);
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(20, 27, 52, 0.08);
+    cursor: pointer;
+}
+
+.night {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(20, 27, 52, 0.08);
+    cursor: pointer;
+}
+
+.langue-connexion:hover,
+.night:hover {
+    border-color: var(--bleu);
+}
+
+.icone,
+.icone-night {
+    width: 16px;
+    height: 16px;
+}
+
+.icone-fleche {
+    width: 12px;
+    height: 12px;
+}
+
+/* ---------- Mise en page : projets à gauche, créneaux à droite ---------- */
+.accueil-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: start;
+}
+
+h2 {
+    color: var(--bleu);
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+/* ---------- Filtres ---------- */
+.section-entete {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.filtres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filtre {
+    height: 28px;
+    min-width: 60px;
+    padding: 0 14px;
+    background: #fff;
+    color: var(--texte);
+    font-size: 0.72rem;
+    font-weight: 500;
+    border: 1px solid var(--bordure);
+    border-radius: 14px;
+    box-shadow: 0 1px 3px rgba(20, 27, 52, 0.08);
+    cursor: pointer;
+}
+
+.filtre:hover {
+    border-color: var(--bleu);
+}
+
+.filtre.actif {
+    background: var(--bleu);
+    border-color: var(--bleu);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* ---------- Cartes projets ---------- */
+.cartes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.carte-projet {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    padding: 20px;
+    background: #fff;
+    border-top: 5px solid var(--bleu);
+    border-radius: 8px;
+    box-shadow: var(--ombre);
+}
+
+.carte-entete {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+/* carré orange avec la fiole */
+.carte-icone {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--orange);
+    border-radius: 10px;
+}
+
+.carte-icone img {
+    width: 20px;
+    height: 20px;
+}
+
+.carte-entete h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.carte-description {
+    margin-bottom: 10px;
+    color: var(--gris);
+    font-size: 0.78rem;
+}
+
+.carte-duree {
+    margin-bottom: 8px;
+    color: var(--gris);
+    font-size: 0.78rem;
+}
+
+.carte-creneau {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    color: var(--gris);
+    font-size: 0.72rem;
+}
+
+.carte-creneau strong {
+    color: var(--texte);
+    font-weight: 600;
+}
+
+.icone-petite {
+    width: 14px;
+    height: 14px;
+}
+
+.btn-primaire {
+    width: 55%;
+    height: 34px;
+    margin-top: auto;
+    margin-left: auto;
+    background: var(--bleu);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-primaire:hover {
+    background: #162a62;
+}
+
+/* ---------- Mes prochains créneaux ---------- */
+#ProchainsCreneaux h2 {
+    margin-bottom: 20px;
+}
+
+.liste-creneaux {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.creneau {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.creneau-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 36px;
+    line-height: 1.1;
+}
+
+.jour {
+    color: var(--bleu);
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.mois {
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.creneau-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.creneau-infos strong {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.creneau-infos span {
+    color: var(--gris-clair);
+    font-size: 0.75rem;
+}
+
+/* ---------- Historique récent ---------- */
+#Historique {
+    margin-top: 80px;
+}
+
+#Historique h2 {
+    margin-bottom: 20px;
+    color: var(--texte);
+    font-size: 1.15rem;
+}
+
+table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+}
+
+th {
+    padding: 0 0 16px;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+td {
+    padding: 8px 0;
+    vertical-align: middle;
+    border-top: 1px solid var(--bordure);
+}
+
+td strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+td small {
+    display: block;
+    margin-top: 2px;
+    color: var(--gris);
+    font-size: 0.65rem;
+}
+
+.badge-date {
+    display: inline-block;
+    padding: 4px 14px;
+    background: #fff;
+    color: var(--vert);
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(20, 27, 52, 0.18);
+}
+
+.statut {
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.statut-valide {
+    color: var(--vert);
+}
+
+/* ---------- Petits écrans ---------- */
+@media (max-width: 900px) {
+    .page {
+        padding: 20px 16px 40px;
+    }
+
+    .accueil-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================================
+   Pop-up d'inscription (sans JavaScript)
+   1) choix du créneau  2) "Demande envoyée"
+   ============================================================ */
+
+/* fenêtre commune aux 2 pop-up */
+.modale {
+    width: calc(100% - 32px);
+    max-width: 380px;
+    padding: 0;
+    overflow: hidden;
+    color: var(--texte);
+    background: #fff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(20, 27, 52, 0.3);
+}
+
+/* pop-up 1 : centrée explicitement (un reset `* { margin: 0 }` ailleurs annule le centrage automatique) */
+.modale[popover] {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    height: fit-content;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+}
+
+.modale::backdrop {
+    background: rgba(20, 27, 52, 0.55);
+}
+
+/* pop-up 2 : fond sombre posé par PHP */
+.modale-fond {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: rgba(20, 27, 52, 0.55);
+}
+
+/* bandeau bleu */
+.modale-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: var(--bleu);
+    color: #fff;
+}
+
+.modale-sur-titre {
+    font-size: 0.7rem;
+    opacity: 0.85;
+}
+
+.modale-entete h2 {
+    margin-top: 2px;
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.modale-fermer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modale-fermer:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* la croix devient blanche sur le fond bleu */
+.modale-fermer img {
+    width: 14px;
+    height: 14px;
+    filter: brightness(0) invert(1);
+}
+
+.modale-corps {
+    padding: 20px;
+}
+
+/* ----- pop-up 1 : liste des créneaux ----- */
+.modale fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.modale legend {
+    margin-bottom: 12px;
+    padding: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.option-creneau {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.option-creneau input {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--bleu);
+}
+
+.option-creneau strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.option-creneau small {
+    color: var(--gris);
+    font-size: 0.72rem;
+}
+
+/* créneau choisi : bordure bleue et fond clair (sans JavaScript) */
+.option-creneau:has(input:checked) {
+    background: #eef0fa;
+    border-color: var(--bleu);
+    box-shadow: 0 0 0 1px var(--bleu);
+}
+
+/* créneau complet */
+.option-creneau.complet {
+    background: #f1f2f6;
+    color: #a0a4b5;
+    cursor: not-allowed;
+}
+
+.option-creneau.complet small {
+    color: #a0a4b5;
+}
+
+.aucun-creneau {
+    color: var(--gris);
+    font-size: 0.8rem;
+}
+
+.consentement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0 16px;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+.consentement input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--bleu);
+}
+
+/* gros bouton du bas (orange : envoyer / bleu : voir mes créneaux) */
+.btn-envoyer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 44px;
+    background: var(--orange);
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-envoyer:hover {
+    background: #cf3a26;
+}
+
+.btn-envoyer:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-envoyer.btn-bleu {
+    background: var(--bleu);
+}
+
+.btn-envoyer.btn-bleu:hover {
+    background: #162a62;
+}
+
+.icone-avion {
+    width: 16px;
+    height: 16px;
+}
+
+/* ----- pop-up 2 : demande envoyée ----- */
+.modale-succes {
+    text-align: center;
+}
+
+.succes-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin: 8px auto 16px;
+    background: #dff3e7;
+    border-radius: 50%;
+}
+
+.succes-icone img {
+    width: 26px;
+    height: 26px;
+}
+
+.modale-succes h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.modale-succes p {
+    margin: 10px 0 22px;
+    color: var(--gris);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
