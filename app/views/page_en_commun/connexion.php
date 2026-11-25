@@ -45,7 +45,7 @@
             <p class="erreur"><?= htmlspecialchars($erreur) ?></p>
         <?php endif; ?>
 
-        <form method="post" action="index.php?c=auth&a=connexion">
+        <form method="post" action="index.php?page=connexion">
             <label for="email">Adresse e-mail</label>
             <div class="champ">
                 <img src="images/mail.png" alt="" class="icone">

@@ -2,25 +2,19 @@
 /*
  * Vue : Mon profil
  *
- * Les données viennent de public/index.php (variables globales).
- * Cette vue est chargée dans une méthode du contrôleur, donc on les
- * déclare "global" pour pouvoir les utiliser ici.
+ * Les données sont préparées par ParticipantController::profil() :
+ * $profil, $genres, $toutesLesLangues, $consentement (date ou null),
+ * $suppressionDemandee et $langue
  */
-global $profil, $consentement, $langue;
 
 // Initiales affichées dans le rond orange (ex : LB)
 $initiales = mb_strtoupper(mb_substr($profil['prenom'], 0, 1) . mb_substr($profil['nom'], 0, 1));
 
-// Choix possibles pour le genre
-$genres = ['Femme', 'Homme', 'Autre', 'Ne souhaite pas répondre'];
+$urlProfil = BASE_URL . '/index.php?page=profil-participant';
 ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?= BASE_URL ?>/css/participant/profil.css">
 
 <!-- Un seul formulaire pour toute la page : le bouton "Enregistrer" envoie tout -->
-<form class="page" method="post" action="" enctype="multipart/form-data">
+<form class="page page-profil" method="post" action="<?= $urlProfil ?>">
 
     <!-- ========== EN-TÊTE ========== -->
     <header class="page-header">
@@ -53,7 +47,7 @@ $genres = ['Femme', 'Homme', 'Autre', 'Ne souhaite pas répondre'];
 
         <div class="bandeau-identite">
             <h2><?= htmlspecialchars($profil['prenom'] . ' ' . $profil['nom']) ?></h2>
-            <p><?= htmlspecialchars($profil['email']) ?> · inscrite depuis <?= htmlspecialchars($profil['inscription']) ?></p>
+            <p><?= htmlspecialchars($profil['email']) ?></p>
         </div>
 
         <div class="bandeau-stats">
@@ -66,13 +60,6 @@ $genres = ['Femme', 'Homme', 'Autre', 'Ne souhaite pas répondre'];
                 <span>profil complété</span>
             </div>
         </div>
-
-        <!-- Le label ouvre le choix de fichier (sans JavaScript) -->
-        <label class="btn-photo">
-            <img src="<?= BASE_URL ?>/images/crayon.png" alt="" class="icone-bouton">
-            Changer la photo
-            <input type="file" name="photo" accept="image/*" hidden>
-        </label>
     </section>
 
     <div class="profil-layout">
@@ -104,18 +91,45 @@ $genres = ['Femme', 'Homme', 'Autre', 'Ne souhaite pas répondre'];
                     <div class="champ">
                         <img src="<?= BASE_URL ?>/images/calendrier.png" alt="" class="ico">
                         <!-- la valeur doit être au format AAAA-MM-JJ -->
-                        <input type="date" id="naissance" name="naissance" value="<?= htmlspecialchars($profil['naissance']) ?>">
+                        <input type="date" id="naissance" name="naissance" max="<?= date('Y-m-d') ?>" value="<?= htmlspecialchars($profil['naissance']) ?>">
                     </div>
                 </div>
 
                 <div class="groupe">
                     <label for="genre">Genre</label>
                     <div class="champ">
+                        <!-- value = valeur enregistrée dans la base, texte = ce qui est affiché -->
                         <select id="genre" name="genre">
-                            <?php foreach ($genres as $g): ?>
-                                <option <?= $g === $profil['genre'] ? 'selected' : '' ?>><?= htmlspecialchars($g) ?></option>
+                            <option value="">Non renseigné</option>
+                            <?php foreach ($genres as $valeur => $texte): ?>
+                                <option value="<?= htmlspecialchars($valeur) ?>" <?= $valeur === $profil['genre'] ? 'selected' : '' ?>><?= htmlspecialchars($texte) ?></option>
                             <?php endforeach; ?>
                         </select>
+                    </div>
+                </div>
+
+                <div class="groupe">
+                    <label for="lunettes">Port de lunettes</label>
+                    <div class="champ">
+                        <!-- 1 = oui, 0 = non, vide = non renseigné -->
+                        <select id="lunettes" name="lunettes">
+                            <option value="">Non renseigné</option>
+                            <option value="1" <?= $profil['lunettes'] === 1 ? 'selected' : '' ?>>Oui</option>
+                            <option value="0" <?= $profil['lunettes'] === 0 ? 'selected' : '' ?>>Non</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="groupe pleine-largeur">
+                    <span class="label-groupe">Langues parlées</span>
+                    <div class="liste-langues">
+                        <?php foreach ($toutesLesLangues as $l): ?>
+                            <label class="case-langue">
+                                <input type="checkbox" name="langues[]" value="<?= (int) $l['id_langue'] ?>"
+                                       <?= in_array($l['id_langue'], $profil['langues']) ? 'checked' : '' ?>>
+                                <?= htmlspecialchars(ucfirst($l['libelle_langue'])) ?>
+                            </label>
+                        <?php endforeach; ?>
                     </div>
                 </div>
 
@@ -150,25 +164,15 @@ $genres = ['Femme', 'Homme', 'Autre', 'Ne souhaite pas répondre'];
                     Consentement
                 </h2>
 
-                <p class="signature">
-                    <img src="<?= BASE_URL ?>/images/coche.png" alt="" class="ico">
-                    Signé le <?= htmlspecialchars($consentement['signe_le']) ?> · valable jusqu'en <?= htmlspecialchars($consentement['valable_jusqua']) ?>
-                </p>
-
-                <label class="option">
-                    <span>Recevoir les nouvelles expériences par e-mail</span>
-                    <input type="checkbox" class="switch" name="notif_email" <?= $consentement['email'] ? 'checked' : '' ?>>
-                </label>
-
-                <label class="option">
-                    <span>Rappel la veille d'un créneau</span>
-                    <input type="checkbox" class="switch" name="notif_rappel" <?= $consentement['rappel_veille'] ? 'checked' : '' ?>>
-                </label>
-
-                <label class="option">
-                    <span>Rappel par SMS</span>
-                    <input type="checkbox" class="switch" name="notif_sms" <?= $consentement['sms'] ? 'checked' : '' ?>>
-                </label>
+                <!-- le consentement est donné à chaque inscription à une expérimentation -->
+                <?php if ($consentement == null): ?>
+                    <p class="aide">Aucun consentement signé pour le moment.</p>
+                <?php else: ?>
+                    <p class="signature">
+                        <img src="<?= BASE_URL ?>/images/coche.png" alt="" class="ico">
+                        Dernier consentement signé le <?= htmlspecialchars($consentement) ?>
+                    </p>
+                <?php endif; ?>
             </section>
 
             <!-- Mes données (RGPD) -->
@@ -186,10 +190,14 @@ $genres = ['Femme', 'Homme', 'Autre', 'Ne souhaite pas répondre'];
                     Télécharger mes données
                 </button>
 
-                <button type="button" class="btn-donnees btn-supprimer" popovertarget="confirmation-suppression">
-                    <img src="<?= BASE_URL ?>/images/poubelle.png" alt="" class="ico">
-                    Supprimer mon compte
-                </button>
+                <?php if ($suppressionDemandee): ?>
+                    <p class="aide">Votre demande de suppression est en attente de traitement par un administrateur.</p>
+                <?php else: ?>
+                    <button type="button" class="btn-donnees btn-supprimer" popovertarget="confirmation-suppression">
+                        <img src="<?= BASE_URL ?>/images/poubelle.png" alt="" class="ico">
+                        Supprimer mon compte
+                    </button>
+                <?php endif; ?>
             </section>
 
         </div>
@@ -202,10 +210,10 @@ $genres = ['Femme', 'Homme', 'Autre', 'Ne souhaite pas répondre'];
      Elle est placée EN DEHORS du formulaire du profil (deux <form> ne peuvent pas s'imbriquer). -->
 <div popover id="confirmation-suppression" class="confirmation">
     <h2>Êtes-vous sûr de vouloir supprimer le compte ?</h2>
-    <p>Cette action est définitive : toutes vos données seront supprimées.</p>
+    <p>Votre demande sera traitée par un administrateur : votre compte sera désactivé et vos données personnelles anonymisées. Cette action est définitive.</p>
 
-    <form method="post" action="" class="actions-confirmation">
-        <!-- CHANGE : le contrôleur doit reconnaître ce champ pour supprimer le compte -->
+    <form method="post" action="<?= $urlProfil ?>" class="actions-confirmation">
+        <!-- le contrôleur reconnaît ce champ pour créer la demande de suppression -->
         <input type="hidden" name="supprimer_compte" value="1">
 
         <button type="button" class="btn-retour" popovertarget="confirmation-suppression" popovertargetaction="hide">

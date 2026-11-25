@@ -2,42 +2,16 @@
 /*
  * Vue : Accueil du participant
  *
- * Les données viennent de public/index.php (variables globales).
- * Cette vue est chargée dans une méthode du contrôleur, donc on les
- * déclare "global" pour pouvoir les utiliser ici.
+ * Les données sont préparées par ParticipantController::accueil() :
+ * $participant, $langue, $projets, $prochainsCreneaux et $inscriptionEnvoyee
+ * et pour les filtres : $nbProjets, $filtreActif, $durees, $dureeMax et $seulementDispo
  */
-global $participant, $langue, $projets, $prochainsCreneaux, $historique;
 
-// Adresses utilisées par les pop-up d'inscription
-$urlAccueil  = BASE_URL . '/index.php?c=participant&a=accueil';
-$urlCreneaux = BASE_URL . '/index.php?c=participant&a=creneaux';
-
-/*
- * Inscription : le formulaire de la 1re pop-up envoie projet_id + creneau + consentement (POST)
- * vers cette même page. Si la demande est valide, on affiche la 2e pop-up ("Demande envoyée").
- * (Plus tard : le contrôleur enregistrera la demande en base avant d'afficher cette pop-up.)
- */
-$inscriptionEnvoyee = false;
-if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['projet_id'], $_POST['creneau'], $_POST['consentement'])) {
-    foreach ($projets as $p) {
-        if ((int) $p['id'] !== (int) $_POST['projet_id']) {
-            continue;
-        }
-        foreach ($p['creneaux'] ?? [] as $cr) {
-            // le créneau doit exister pour ce projet et ne pas être complet
-            if ((int) $cr['id'] === (int) $_POST['creneau'] && $cr['places'] > 0) {
-                $inscriptionEnvoyee = true;
-            }
-        }
-    }
-}
+$urlAccueil = BASE_URL . '/index.php?page=accueil-participant';
+$urlCreneaux = BASE_URL . '/index.php?page=creneaux-participant';
 ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?= BASE_URL ?>/css/participant/accueil.css">
 
-<div class="page">
+<div class="page page-accueil">
 
     <header class="page-header">
         <div>
@@ -66,11 +40,52 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['projet_id'], 
             <div class="section-entete">
                 <h2>Nouveau(x) projet(s) ouvert(s) pour vous</h2>
 
+                <!-- la classe "actif" colore le filtre choisi ($filtreActif vient du contrôleur) -->
                 <div class="filtres">
-                    <button type="button" class="filtre actif">Toutes (<?= count($projets) ?>)</button>
-                    <button type="button" class="filtre">&lt; 30 min</button>
-                    <button type="button" class="filtre">Filtres</button>
+                    <a class="filtre <?= $filtreActif == 'toutes' ? 'actif' : '' ?>" href="<?= $urlAccueil ?>">Toutes (<?= $nbProjets ?>)</a>
+                    <a class="filtre <?= $filtreActif == '30min' ? 'actif' : '' ?>" href="<?= $urlAccueil ?>&amp;duree=30">≤ 30 min</a>
+                    <button type="button" class="filtre <?= $filtreActif == 'filtres' ? 'actif' : '' ?>" popovertarget="panneau-filtres">Filtres</button>
                 </div>
+            </div>
+
+            <?php if ($nbProjets == 0): ?>
+                <p>Aucune nouvelle expérimentation pour le moment.</p>
+            <?php elseif (count($projets) == 0): ?>
+                <p>Aucune expérimentation ne correspond à ces filtres.</p>
+            <?php endif; ?>
+
+            <!-- ===== POP-UP DES FILTRES (formulaire en GET : les filtres vont dans l'adresse) ===== -->
+            <div popover id="panneau-filtres" class="modale">
+                <header class="modale-entete">
+                    <div>
+                        <span class="modale-sur-titre">Accueil</span>
+                        <h2>Filtres</h2>
+                    </div>
+                    <button type="button" class="modale-fermer" popovertarget="panneau-filtres" popovertargetaction="hide" aria-label="Fermer">
+                        <img src="<?= BASE_URL ?>/images/croix.png" alt="">
+                    </button>
+                </header>
+
+                <form method="get" action="<?= BASE_URL ?>/index.php" class="modale-corps">
+                    <!-- en GET, l'adresse de action est remplacée : il faut renvoyer le nom de la page -->
+                    <input type="hidden" name="page" value="accueil-participant">
+
+                    <label for="duree" class="label-filtre">Durée maximale</label>
+                    <select id="duree" name="duree" class="select-filtre">
+                        <option value="">Peu importe</option>
+                        <?php foreach ($durees as $d): ?>
+                            <option value="<?= $d ?>" <?= $d == $dureeMax ? 'selected' : '' ?>><?= $d ?> min</option>
+                        <?php endforeach; ?>
+                    </select>
+
+                    <label class="consentement">
+                        <input type="checkbox" name="dispo" value="1" <?= $seulementDispo ? 'checked' : '' ?>>
+                        Seulement avec un créneau disponible
+                    </label>
+
+                    <button type="submit" class="btn-envoyer btn-bleu">Appliquer</button>
+                    <a class="lien-reinitialiser" href="<?= $urlAccueil ?>">Réinitialiser les filtres</a>
+                </form>
             </div>
 
             <div class="cartes">
@@ -110,40 +125,18 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['projet_id'], 
                             <form method="post" action="<?= htmlspecialchars($urlAccueil) ?>" class="modale-corps">
                                 <input type="hidden" name="projet_id" value="<?= $id ?>">
 
-                                <fieldset>
-                                    <legend>Choisissez un créneau</legend>
-
-                                    <!-- CHANGE : les créneaux viennent de $projet['creneaux'] (id, libelle, places) -->
-                                    <?php $premierLibre = true; ?>
-                                    <?php foreach ($projet['creneaux'] ?? [] as $cr): ?>
-                                        <?php
-                                        $complet = $cr['places'] <= 0;
-                                        $pluriel = $cr['places'] > 1 ? 's' : '';
-                                        $texte   = $complet ? 'complet' : $cr['places'] . ' place' . $pluriel . ' restante' . $pluriel;
-                                        ?>
-                                        <label class="option-creneau <?= $complet ? 'complet' : '' ?>">
-                                            <input type="radio" name="creneau" value="<?= (int) $cr['id'] ?>"
-                                                   <?= $complet ? 'disabled' : 'required' ?>
-                                                   <?= (!$complet && $premierLibre) ? 'checked' : '' ?>>
-                                            <span>
-                                                <strong><?= htmlspecialchars($cr['libelle']) ?></strong>
-                                                <small><?= htmlspecialchars($texte) ?></small>
-                                            </span>
-                                        </label>
-                                        <?php if (!$complet) { $premierLibre = false; } ?>
-                                    <?php endforeach; ?>
-
-                                    <?php if (empty($projet['creneaux'])): ?>
-                                        <p class="aucun-creneau">Aucun créneau disponible pour le moment.</p>
-                                    <?php endif; ?>
-                                </fieldset>
+                                <p class="modale-info">
+                                    Votre demande sera envoyée au responsable de l'expérimentation.
+                                    Une fois acceptée, vous recevrez une notification et pourrez choisir
+                                    votre créneau dans la page Créneaux.
+                                </p>
 
                                 <label class="consentement">
                                     <input type="checkbox" name="consentement" required>
                                     J'ai lu et j'accepte la fiche de consentement
                                 </label>
 
-                                <button type="submit" class="btn-envoyer" <?= empty($projet['creneaux']) ? 'disabled' : '' ?>>
+                                <button type="submit" class="btn-envoyer">
                                     Envoyer ma demande
                                     <img src="<?= BASE_URL ?>/images/avion.png" alt="" class="icone-avion">
                                 </button>
@@ -157,6 +150,10 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['projet_id'], 
         <aside id="ProchainsCreneaux">
             <h2>Mes prochains créneaux</h2>
 
+            <?php if (count($prochainsCreneaux) == 0): ?>
+                <p>Aucun créneau à venir.</p>
+            <?php endif; ?>
+
             <ul class="liste-creneaux">
                 <?php foreach ($prochainsCreneaux as $creneau): ?>
                     <li class="creneau">
@@ -166,7 +163,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['projet_id'], 
                         </div>
                         <div class="creneau-infos">
                             <strong><?= htmlspecialchars($creneau['titre']) ?></strong>
-                            <span><?= htmlspecialchars($creneau['heure']) ?> salle <?= htmlspecialchars($creneau['salle']) ?></span>
+                            <span><?= htmlspecialchars($creneau['heure']) ?></span>
                         </div>
                     </li>
                 <?php endforeach; ?>
@@ -174,32 +171,6 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['projet_id'], 
         </aside>
 
     </div>
-
-    <section id="Historique">
-        <h2>Historique récent</h2>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Expérimentations</th>
-                    <th>Date</th>
-                    <th>Statut</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($historique as $ligne): ?>
-                    <tr>
-                        <td>
-                            <strong><?= htmlspecialchars($ligne['titre']) ?></strong>
-                            <small><?= htmlspecialchars($ligne['detail']) ?></small>
-                        </td>
-                        <td><span class="badge-date"><?= htmlspecialchars($ligne['date']) ?></span></td>
-                        <td><span class="statut statut-valide"><?= htmlspecialchars($ligne['statut']) ?></span></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </section>
 
 </div>
 
@@ -223,7 +194,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST' && isset($_POST['projet_id'], 
                     <img src="<?= BASE_URL ?>/images/coche.png" alt="">
                 </span>
                 <h3 id="titre-confirmation">Demande envoyée</h3>
-                <p>Le responsable valide sous 48 h. Vous recevrez un e-mail de confirmation.</p>
+                <p>Le responsable doit maintenant valider votre demande. Vous serez prévenu dans votre messagerie, puis vous pourrez choisir votre créneau.</p>
                 <a class="btn-envoyer btn-bleu" href="<?= htmlspecialchars($urlCreneaux) ?>">Voir mes créneaux</a>
             </div>
         </div>

@@ -2,22 +2,21 @@
 /*
  * Vue : Mes expérimentations
  *
- * Les données viennent de public/index.php (variables globales).
- * Cette vue est chargée dans une méthode du contrôleur, donc on les
- * déclare "global" pour pouvoir les utiliser ici.
+ * Les données sont préparées par ParticipantController::experimentation() :
+ * $participant, $langue et $experimentations (titre, statut, statut_classe, progression, creneau)
  */
-global $participant, $langue, $experimentations;
 
 /*
  * Filtres : le filtre choisi est dans l'adresse (?filtre=en-cours).
  * Chaque bouton est un lien : au clic la page se recharge avec le bon filtre.
  * "classe" = statut_classe des expérimentations à garder (null = toutes).
+ * Les inscriptions refusées ont la classe statut-archive : elles sont rangées avec les terminées.
  */
 $filtres = [
-    'toutes'     => ['label' => 'Toutes',     'classe' => null],
-    'en-cours'   => ['label' => 'En cours',   'classe' => 'statut-en-cours'],
-    'brouillons' => ['label' => 'Brouillons', 'classe' => 'statut-brouillon'],
-    'archivees'  => ['label' => 'Archivées',  'classe' => 'statut-archive'],
+    'toutes' => ['label' => 'Toutes', 'classe' => null],
+    'en-attente' => ['label' => 'En attente', 'classe' => 'statut-brouillon'],
+    'en-cours' => ['label' => 'En cours', 'classe' => 'statut-en-cours'],
+    'terminees' => ['label' => 'Terminées', 'classe' => 'statut-archive'],
 ];
 
 // Filtre demandé ("toutes" si absent ou inconnu)
@@ -39,12 +38,8 @@ $affichees = $classeVoulue === null
     ? $experimentations
     : array_filter($experimentations, fn($e) => $e['statut_classe'] === $classeVoulue);
 ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?= BASE_URL ?>/css/participant/experimentation.css">
 
-<div class="page">
+<div class="page page-experimentations">
 
     <header class="page-header">
         <div>
@@ -72,7 +67,7 @@ $affichees = $classeVoulue === null
         <?php foreach ($filtres as $cle => $filtre): ?>
             <!-- la classe "actif" colore le filtre sélectionné -->
             <a class="filtre <?= $cle === $filtreActif ? 'actif' : '' ?>"
-               href="<?= BASE_URL ?>/index.php?c=participant&amp;a=experimentation&amp;filtre=<?= $cle ?>"
+               href="<?= BASE_URL ?>/index.php?page=experimentations-participant&amp;filtre=<?= $cle ?>"
                <?= $cle === $filtreActif ? 'aria-current="true"' : '' ?>>
                 <?= htmlspecialchars($filtre['label']) ?> (<?= (int) $filtre['nb'] ?>)
             </a>

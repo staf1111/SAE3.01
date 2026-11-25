@@ -2,18 +2,12 @@
 /*
  * Vue : Historique de mes participations
  *
- * Les données viennent de public/index.php (variables globales).
- * Cette vue est chargée dans une méthode du contrôleur, donc on les
- * déclare "global" pour pouvoir les utiliser ici.
+ * Les données sont préparées par ParticipantController::historique() :
+ * $statsHistorique (nb_participations, temps_total), $participations et $langue
  */
-global $statsHistorique, $participations, $langue;
 ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?= BASE_URL ?>/css/participant/historique.css">
 
-<div class="page">
+<div class="page page-historique">
 
     <header class="page-header">
         <div>
@@ -61,29 +55,33 @@ global $statsHistorique, $participations, $langue;
     <section class="panneau">
         <h2>Mes participations</h2>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Expérimentation</th>
-                    <th>Date</th>
-                    <th>Participation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($participations as $p): ?>
+        <?php if (count($participations) == 0): ?>
+            <p>Aucune participation pour le moment.</p>
+        <?php else: ?>
+            <table>
+                <thead>
                     <tr>
-                        <td class="exp"><?= htmlspecialchars($p['titre']) ?></td>
-                        <td><?= htmlspecialchars($p['date']) ?></td>
-                        <!-- statut_classe : statut-valide / statut-absent / statut-annule -->
-                        <td>
-                            <span class="statut <?= htmlspecialchars($p['statut_classe']) ?>">
-                                <?= htmlspecialchars($p['statut']) ?>
-                            </span>
-                        </td>
+                        <th>Expérimentation</th>
+                        <th>Date</th>
+                        <th>Participation</th>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($participations as $p): ?>
+                        <tr>
+                            <td class="exp"><?= htmlspecialchars($p['titre']) ?></td>
+                            <td><?= htmlspecialchars($p['date']) ?></td>
+                            <!-- statut_classe : statut-valide / statut-absent / statut-annule -->
+                            <td>
+                                <span class="statut <?= htmlspecialchars($p['statut_classe']) ?>">
+                                    <?= htmlspecialchars($p['statut']) ?>
+                                </span>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php endif; ?>
     </section>
 
 </div>
