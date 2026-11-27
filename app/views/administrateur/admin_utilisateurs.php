@@ -24,12 +24,12 @@ $permissions      = $permissions ?? [];
     <div class="exporter">
         <span class="exporter-csv">
             <img src="<?= BASE_URL ?>/images/export.png" alt="" class="icone-export">
-            Exporter(CSV)
+            Exporter (CSV)
         </span>
 
         <span class="new-users">
             <img src="<?= BASE_URL ?>/images/plus.png" alt="" class="icone-plus">
-            Crée un utilisateur
+            Créer un utilisateur
         </span>
     </div>
 
@@ -103,29 +103,65 @@ $permissions      = $permissions ?? [];
         </tbody>
     </table>
 
+    <div class="pied-tableau">
+        <span class="compteur">
+            <?= $total > 0 ? $debut + 1 : 0 ?>–<?= $debut + count($utilisateursPage) ?> sur <?= $total ?>
+        </span>
+
+        <?php $lien = "index.php?c=administrateur&a=utilisateurs&filtre=$filtreActif&page="; ?>
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="<?= $lien . ($page - 1) ?>" class="page-btn">Précédent</a>
+            <?php else: ?>
+                <span class="page-btn desactive">Précédent</span>
+            <?php endif; ?>
+
+            <?php for ($i = 1; $i <= $nbPages; $i++): ?>
+                <a href="<?= $lien . $i ?>" class="page-btn <?= $i === $page ? 'actif' : '' ?>"><?= $i ?></a>
+            <?php endfor; ?>
+
+            <?php if ($page < $nbPages): ?>
+                <a href="<?= $lien . ($page + 1) ?>" class="page-btn">Suivant</a>
+            <?php else: ?>
+                <span class="page-btn desactive">Suivant</span>
+            <?php endif; ?>
+        </div>
+    </div>
 </div>
 
-<div class="pied-tableau">
-    <span class="compteur">
-        <?= $total > 0 ? $debut + 1 : 0 ?>–<?= $debut + count($utilisateursPage) ?> sur <?= $total ?>
-    </span>
-
-    <?php $lien = "index.php?c=administrateur&a=utilisateurs&filtre=$filtreActif&page="; ?>
-    <div class="pagination">
-        <?php if ($page > 1): ?>
-            <a href="<?= $lien . ($page - 1) ?>" class="page-btn">Précédent</a>
-        <?php else: ?>
-            <span class="page-btn desactive">Précédent</span>
-        <?php endif; ?>
-
-        <?php for ($i = 1; $i <= $nbPages; $i++): ?>
-            <a href="<?= $lien . $i ?>" class="page-btn <?= $i === $page ? 'actif' : '' ?>"><?= $i ?></a>
-        <?php endfor; ?>
-
-        <?php if ($page < $nbPages): ?>
-            <a href="<?= $lien . ($page + 1) ?>" class="page-btn">Suivant</a>
-        <?php else: ?>
-            <span class="page-btn desactive">Suivant</span>
-        <?php endif; ?>
+<div class="panneau-users panneau-permissions">
+    <div class="entete-permissions">
+        <h2 class="titre-panneau">Rôles et permissions</h2>
+        <a href="#" class="bouton-modifier">
+            <img src="<?= BASE_URL ?>/images/modifier.png" alt="" class="icone-modifier">
+            Modifier les permissions
+        </a>
     </div>
+
+    <table class="tableau-permissions">
+        <thead>
+            <tr>
+                <th>Permission</th>
+                <?php foreach ($roles as $role): ?>
+                    <th class="centre"><?= htmlspecialchars($role) ?></th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($permissions as $permission => $acces): ?>
+                <tr>
+                    <td><?= htmlspecialchars($permission) ?></td>
+                    <?php foreach ($acces as $autorise): ?>
+                        <td class="centre">
+                            <?php if ($autorise): ?>
+                                <span class="case cochee">✓</span>
+                            <?php else: ?>
+                                <span class="case"></span>
+                            <?php endif; ?>
+                        </td>
+                    <?php endforeach; ?>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>

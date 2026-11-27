@@ -47,7 +47,7 @@ $menus['admin'] = [
     'journaux' => ['label' => 'Journaux', 'href' => BASE_URL . '/index.php?c=administrateur&a=journaux', 'icon' => $icones['journal']],
     'statistiques' => ['label' => 'Statistiques', 'href' => BASE_URL . '/index.php?c=administrateur&a=statistiques', 'icon' => $icones['graphique']],
     'messagerie' => $ongletMessagerie,
-    'profil' => $ongletProfil,
+    'profil' => ['label' => 'Mon profil', 'href' => BASE_URL . '/index.php?c=administrateur&a=profil', 'icon' => $icones['utilisateur']],
 ];
 
 return $menus;

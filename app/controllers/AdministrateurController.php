@@ -239,4 +239,37 @@ class AdministrateurController
         $contentView = __DIR__ . '/../views/administrateur/admin_utilisateurs.php';
         require __DIR__ . '/../views/layout.php';
     }
+    public function profil(): void
+    {
+        // Fausses données (remplacées plus tard par une requête sur UTILISATEUR)
+        $profil = [
+            'prenom'        => 'Claire',
+            'nom'           => 'Lemoine',
+            'email'         => 'claire.lemoine@univ-lemans.fr',
+            'inscription'   => 'septembre 2025',
+            'naissance'     => '1985-04-12',      // format AAAA-MM-JJ
+            'genre'         => 'Femme',
+            'derniere_connexion' => "Aujourd'hui à 08:42",
+            'derniere_ip'   => '192.168.4.2',
+        ];
+
+
+        $resume = [
+            'comptes_geres'       => 1284,
+            'demandes_en_attente' => 12,
+        ];
+
+
+        $alertes = [
+            'echecs_connexion' => true,
+            'demandes_rgpd'    => true,
+            'rapport_hebdo'    => false,
+        ];
+
+        $langue = 'Français';
+
+        $currentPage = 'profil';
+        $contentView = __DIR__ . '/../views/administrateur/admin_profil.php';
+        require __DIR__ . '/../views/layout.php';
+    }
 }
