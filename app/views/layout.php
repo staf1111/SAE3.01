@@ -1,6 +1,6 @@
 <?php
 // Squelette commun à toutes les pages : navbar + contenu de la page
-// Le contrôleur définit avant : $currentPage (onglet actif), $badges et $contentView (vue à afficher)
+// Le contrôleur définit avant : $currentPage (onglet actif), $badges, $message et $contentView (vue à afficher)
 
 if (!defined('BASE_URL')) {
     define('BASE_URL', '');
@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$navigation = require __DIR__ . '/../controllers/Navigation.php';
+$navigation = require __DIR__ . '/../controllers/navigation.php';
 $role = $_SESSION['role'] ?? '';
 $liens = $navigation[$role] ?? [];
 
@@ -31,7 +31,10 @@ if (!isset($badges)) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/NavBar.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/Pages.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/pages.css">
+    <?php if ($role == 'participant'): ?>
+        <link rel="stylesheet" href="<?= BASE_URL ?>/css/participant.css">
+    <?php endif; ?>
 </head>
 
 <body>
@@ -58,10 +61,14 @@ if (!isset($badges)) {
             </ul>
         </nav>
 
-        <a class="logout" href="#">Se déconnecter</a>
+        <a class="logout" href="<?= BASE_URL ?>/index.php?page=deconnexion">Se déconnecter</a>
     </header>
 
     <main>
+        <?php if (!empty($message)): ?>
+            <p class="flash flash-<?= $message['type'] ?>"><?= htmlspecialchars($message['texte']) ?></p>
+        <?php endif; ?>
+
         <?php
         if (!empty($contentView)) {
             require $contentView;

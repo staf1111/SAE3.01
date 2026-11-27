@@ -15,6 +15,12 @@ $icones = [
     'mail' => '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
 ];
 
+// adresse d'une page du site, par exemple lien('dashboard')
+function lien($page)
+{
+    return BASE_URL . '/index.php?page=' . $page;
+}
+
 // onglets présents pour tous les rôles
 $ongletMessagerie = ['label' => 'Messagerie', 'href' => '#', 'icon' => $icones['mail']];
 $ongletProfil = ['label' => 'Mon profil', 'href' => '#', 'icon' => $icones['utilisateur']];
@@ -22,20 +28,20 @@ $ongletProfil = ['label' => 'Mon profil', 'href' => '#', 'icon' => $icones['util
 $menus = [];
 
 $menus['participant'] = [
-    'accueil' => ['label' => 'Accueil', 'href' => '#', 'icon' => $icones['maison']],
-    'experimentations' => ['label' => 'Expérimentations', 'href' => '#', 'icon' => $icones['fiole']],
-    'creneaux' => ['label' => 'Créneaux', 'href' => '#', 'icon' => $icones['calendrier']],
-    'historique' => ['label' => 'Historique', 'href' => '#', 'icon' => $icones['historique']],
+    'accueil' => ['label' => 'Accueil', 'href' => lien('accueil-participant'), 'icon' => $icones['maison']],
+    'experimentations' => ['label' => 'Expérimentations', 'href' => lien('experimentations-participant'), 'icon' => $icones['fiole']],
+    'creneaux' => ['label' => 'Créneaux', 'href' => lien('creneaux-participant'), 'icon' => $icones['calendrier']],
+    'historique' => ['label' => 'Historique', 'href' => lien('historique-participant'), 'icon' => $icones['historique']],
     'messagerie' => $ongletMessagerie,
-    'profil' => $ongletProfil,
+    'profil' => ['label' => 'Mon profil', 'href' => lien('profil-participant'), 'icon' => $icones['utilisateur']],
 ];
 
 $menus['enseignant'] = [
-    'dashboard' => ['label' => 'Tableau de bord', 'href' => BASE_URL . '/index.php?page=dashboard', 'icon' => $icones['maison']],
-    'experimentations' => ['label' => 'Expérimentations', 'href' => BASE_URL . '/index.php?page=experimentations', 'icon' => $icones['fiole']],
-    'participants' => ['label' => 'Participants', 'href' => BASE_URL . '/index.php?page=participants', 'icon' => $icones['utilisateurs']],
-    'creneaux' => ['label' => 'Créneaux', 'href' => BASE_URL . '/index.php?page=creneaux', 'icon' => $icones['calendrier']],
-    'statistiques' => ['label' => 'Statistiques', 'href' => BASE_URL . '/index.php?page=statistiques', 'icon' => $icones['graphique']],
+    'dashboard' => ['label' => 'Tableau de bord', 'href' => lien('dashboard'), 'icon' => $icones['maison']],
+    'experimentations' => ['label' => 'Expérimentations', 'href' => lien('experimentations'), 'icon' => $icones['fiole']],
+    'participants' => ['label' => 'Participants', 'href' => lien('participants'), 'icon' => $icones['utilisateurs']],
+    'creneaux' => ['label' => 'Créneaux', 'href' => lien('creneaux'), 'icon' => $icones['calendrier']],
+    'statistiques' => ['label' => 'Statistiques', 'href' => lien('statistiques'), 'icon' => $icones['graphique']],
     'messagerie' => $ongletMessagerie,
     'profil' => $ongletProfil,
 ];

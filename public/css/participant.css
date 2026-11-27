@@ -1,0 +1,1362 @@
+/* Styles des pages du participant (chargé par le layout seulement pour le rôle participant) */
+
+/* Le centrage et la largeur (1100px) sont faits par main dans pages.css.
+   Le reset (* { margin: 0 }), la police et le fond sont dans NavBar.css. */
+
+/* ===== Couleurs ===== */
+
+:root {
+    --bleu: #1E3578;
+    --orange: #E6442F;
+    --rouge: #c0281a;
+    --texte: #141B34;
+    --gris: #6b7280;
+    --gris-clair: #9ca3af;
+    --bordure: #E2E5EE;
+    --vert: #1f7a4d;
+    --fond: #f3f5fa;
+    --champ: #f5f6f8;
+    --ombre: 0 3px 10px rgba(20, 27, 52, 0.15);
+}
+
+/* les boutons ne prennent pas la police de la page tout seuls */
+button {
+    font-family: inherit;
+}
+
+/* ===== Commun aux 5 pages ===== */
+
+/* titre à gauche, boutons langue + mode sombre à droite */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    color: var(--bleu);
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.page-sous-titre {
+    margin-top: 4px;
+    color: var(--gris);
+    font-size: 0.8rem;
+}
+
+.langue {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.langue-connexion {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 34px;
+    padding: 0 12px;
+    background: #fff;
+    color: var(--texte);
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(20, 27, 52, 0.08);
+    cursor: pointer;
+}
+
+.night {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(20, 27, 52, 0.08);
+    cursor: pointer;
+}
+
+.langue-connexion:hover,
+.night:hover {
+    border-color: var(--bleu);
+}
+
+/* petites icônes (images) */
+.icone,
+.icone-night {
+    width: 16px;
+    height: 16px;
+}
+
+.ico {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+}
+
+.icone-petite {
+    width: 14px;
+    height: 14px;
+}
+
+.icone-fleche,
+.icone-bouton {
+    width: 12px;
+    height: 12px;
+}
+
+/* carré orange avec la fiole (accueil et mes expérimentations) */
+.carte-icone {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--orange);
+    border-radius: 10px;
+}
+
+.carte-icone img {
+    width: 20px;
+    height: 20px;
+}
+
+/* ligne "Prochain créneau : ..." (accueil et mes expérimentations) */
+.carte-creneau {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gris);
+    font-size: 0.75rem;
+}
+
+.carte-creneau strong {
+    color: var(--texte);
+    font-weight: 600;
+}
+
+/* filtres : boutons sur l'accueil, liens sur mes expérimentations */
+.filtres {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.filtre {
+    display: inline-flex;
+    align-items: center;
+    height: 34px;
+    padding: 0 16px;
+    background: #fff;
+    color: var(--texte);
+    font-size: 0.78rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--bordure);
+    border-radius: 17px;
+    cursor: pointer;
+}
+
+.filtre:hover {
+    border-color: var(--bleu);
+}
+
+/* filtre sélectionné */
+.filtre.actif {
+    background: var(--bleu);
+    border-color: var(--bleu);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* panneaux blancs (créneaux et historique) */
+.panneau {
+    margin-bottom: 24px;
+    padding: 20px 22px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 12px;
+}
+
+.panneau h2 {
+    margin-bottom: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* petit texte gris d'explication */
+.aide {
+    margin-bottom: 16px;
+    color: var(--gris);
+    font-size: 0.72rem;
+    line-height: 1.5;
+}
+
+/* bouton blanc avec une bordure (Changer, Annuler, Fermer...) */
+.btn-contour {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 14px;
+    background: #fff;
+    color: var(--texte);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-contour:hover {
+    border-color: var(--bleu);
+}
+
+/* ===== Étiquettes de statut ===== */
+
+.statut {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+    border-radius: 12px;
+}
+
+/* petit point devant le statut */
+.statut::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+/* vert : en cours, confirmé, présent */
+.statut-en-cours,
+.statut-confirme,
+.statut-valide {
+    background: #dff3e7;
+    color: var(--vert);
+}
+
+/* jaune : en attente */
+.statut-brouillon,
+.statut-attente {
+    background: #fdf0d5;
+    color: #a56a00;
+}
+
+/* gris : terminé, annulé */
+.statut-archive,
+.statut-annule {
+    background: #eceef4;
+    color: var(--gris);
+}
+
+/* rouge : absent */
+.statut-absent {
+    background: #fde4e1;
+    color: var(--rouge);
+}
+
+/* ===== Accueil ===== */
+
+/* projets à gauche, prochains créneaux à droite */
+.accueil-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 48px;
+    align-items: start;
+}
+
+.page-accueil h2 {
+    color: var(--bleu);
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.section-entete {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.page-accueil .cartes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.carte-projet {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    padding: 20px;
+    background: #fff;
+    border-top: 5px solid var(--bleu);
+    border-radius: 8px;
+    box-shadow: var(--ombre);
+}
+
+.carte-entete {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.carte-entete h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.carte-description,
+.carte-duree {
+    margin-bottom: 10px;
+    color: var(--gris);
+    font-size: 0.78rem;
+}
+
+.carte-projet .carte-creneau {
+    margin-bottom: 18px;
+}
+
+.btn-primaire {
+    width: 55%;
+    height: 34px;
+    margin-top: auto;
+    margin-left: auto;
+    background: var(--bleu);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-primaire:hover {
+    background: #162a62;
+}
+
+/* mes prochains créneaux (colonne de droite) */
+#ProchainsCreneaux h2 {
+    margin-bottom: 20px;
+}
+
+.liste-creneaux {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
+    list-style: none;
+}
+
+.creneau {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.creneau-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 36px;
+    line-height: 1.1;
+}
+
+.creneau-date .jour {
+    color: var(--bleu);
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.creneau-date .mois {
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.creneau-infos {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.creneau-infos strong {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.creneau-infos span {
+    color: var(--gris-clair);
+    font-size: 0.75rem;
+}
+
+/* ===== Pop-up d'inscription (accueil, sans JavaScript) ===== */
+
+/* fenêtre commune aux 2 pop-up */
+.modale {
+    width: calc(100% - 32px);
+    max-width: 380px;
+    padding: 0;
+    overflow: hidden;
+    color: var(--texte);
+    background: #fff;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(20, 27, 52, 0.3);
+}
+
+/* pop-up 1 : on la centre nous-mêmes car * { margin: 0 } enlève le centrage automatique */
+.modale[popover] {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    height: fit-content;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+}
+
+.modale::backdrop {
+    background: rgba(20, 27, 52, 0.55);
+}
+
+/* pop-up 2 : fond sombre affiché par PHP */
+.modale-fond {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: 16px;
+    background: rgba(20, 27, 52, 0.55);
+}
+
+/* bandeau bleu en haut */
+.modale-entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: var(--bleu);
+    color: #fff;
+}
+
+.modale-sur-titre {
+    font-size: 0.7rem;
+    opacity: 0.85;
+}
+
+.modale-entete h2 {
+    margin-top: 2px;
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.modale-fermer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modale-fermer:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* la croix devient blanche sur le fond bleu */
+.modale-fermer img {
+    width: 14px;
+    height: 14px;
+    filter: brightness(0) invert(1);
+}
+
+.modale-corps {
+    padding: 20px;
+}
+
+.modale-info {
+    color: var(--gris);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.consentement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0 16px;
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+
+.consentement input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--bleu);
+}
+
+/* gros bouton du bas (orange : envoyer / bleu : voir mes créneaux) */
+.btn-envoyer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 44px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-envoyer:hover {
+    background: #cf3a26;
+}
+
+.btn-envoyer.btn-bleu {
+    background: var(--bleu);
+}
+
+.btn-envoyer.btn-bleu:hover {
+    background: #162a62;
+}
+
+.icone-avion {
+    width: 16px;
+    height: 16px;
+}
+
+/* pop-up des filtres */
+.label-filtre {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.select-filtre {
+    width: 100%;
+    height: 38px;
+    padding: 0 10px;
+    background: var(--champ);
+    color: var(--texte);
+    font-family: inherit;
+    font-size: 0.8rem;
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+}
+
+.lien-reinitialiser {
+    display: block;
+    margin-top: 12px;
+    color: var(--gris);
+    font-size: 0.75rem;
+    text-align: center;
+}
+
+/* pop-up 2 : demande envoyée */
+.modale-succes {
+    text-align: center;
+}
+
+.modale-succes .succes-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    margin: 8px auto 16px;
+    background: #dff3e7;
+    border-radius: 50%;
+}
+
+.succes-icone img {
+    width: 26px;
+    height: 26px;
+}
+
+.modale-succes h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
+.modale-succes p {
+    margin: 10px 0 22px;
+    color: var(--gris);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+/* ===== Mes expérimentations ===== */
+
+.page-experimentations .filtres {
+    margin-bottom: 24px;
+}
+
+.page-experimentations .cartes {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+}
+
+.page-experimentations .carte {
+    min-height: 210px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 12px;
+}
+
+.carte-haut {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.page-experimentations .carte-titre {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.page-experimentations .carte-titre h2 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.progression {
+    width: 180px;
+    padding: 12px 16px;
+    margin-bottom: 18px;
+    background: var(--fond);
+    border-radius: 10px;
+}
+
+.progression-titre {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gris);
+    font-size: 0.75rem;
+}
+
+.progression-valeur {
+    margin-top: 6px;
+    color: var(--bleu);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* aucun résultat pour le filtre choisi */
+.vide {
+    padding: 30px 0;
+    color: var(--gris);
+    font-size: 0.85rem;
+}
+
+/* ===== Mes créneaux ===== */
+
+.liste-rdv {
+    padding: 0;
+    list-style: none;
+}
+
+.rdv {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-top: 1px solid var(--bordure);
+}
+
+/* petite case avec le jour et le mois */
+.rdv-date {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48px;
+    padding: 6px 0;
+    background: #e9ecf6;
+    border-radius: 8px;
+    line-height: 1.1;
+}
+
+.rdv-date .jour {
+    color: var(--bleu);
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.rdv-date .mois {
+    color: var(--gris);
+    font-size: 0.55rem;
+    font-weight: 600;
+}
+
+.rdv-infos {
+    flex: 1;
+}
+
+.rdv-infos strong {
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.rdv-infos p {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 4px;
+    color: var(--gris);
+    font-size: 0.72rem;
+}
+
+.rdv-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* liste des créneaux proposés dans le panneau "Choisir un créneau" */
+.choix-liste {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+/* on cache la vraie case à cocher, c'est le span qui sert de bouton */
+.choix input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.choix span {
+    display: inline-block;
+    padding: 8px 14px;
+    background: #fff;
+    color: var(--bleu);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--bleu);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* créneau coché : fond bleu */
+.choix input:checked + span {
+    background: var(--bleu);
+    color: #fff;
+}
+
+.choix input:checked + span::before {
+    content: "✓ ";
+}
+
+/* déjà réservé */
+.choix-reserve span {
+    background: #dff3e7;
+    color: var(--vert);
+    border-color: #dff3e7;
+    cursor: default;
+}
+
+/* complet */
+.choix-complet span {
+    background: #eceef4;
+    color: #a0a4b5;
+    border-color: #eceef4;
+    cursor: not-allowed;
+}
+
+.reservation {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-reserver {
+    height: 32px;
+    padding: 0 16px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-reserver:hover {
+    background: #cf3a26;
+}
+
+/* compteur des créneaux cochés : il part de 0 et chaque case cochée ajoute 1,
+   le bouton "Réserver" affiche le résultat entre parenthèses */
+.formulaire-creneaux {
+    counter-reset: nb;
+}
+
+.choix input:checked {
+    counter-increment: nb;
+}
+
+.btn-reserver .nb::after {
+    content: "(" counter(nb) ")";
+}
+
+/* ===== Historique ===== */
+
+/* les 2 cases du haut */
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 12px;
+}
+
+.stat-icone {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--orange);
+    border-radius: 10px;
+}
+
+.stat-icone img {
+    width: 20px;
+    height: 20px;
+}
+
+/* rend l'icône horloge (grise) blanche sur le fond orange */
+.icone-blanche {
+    filter: brightness(0) invert(1);
+}
+
+.stat strong {
+    display: block;
+    color: var(--bleu);
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.stat span {
+    color: var(--gris);
+    font-size: 0.72rem;
+}
+
+.page-historique th {
+    padding: 0 0 10px;
+    color: var(--gris);
+    font-size: 0.68rem;
+    font-weight: 500;
+}
+
+.page-historique td {
+    padding: 14px 0;
+    font-size: 0.75rem;
+}
+
+.page-historique td.exp {
+    font-weight: 700;
+}
+
+/* largeur des 2 premières colonnes */
+.page-historique th:nth-child(1),
+.page-historique td:nth-child(1) {
+    width: 50%;
+}
+
+.page-historique th:nth-child(2),
+.page-historique td:nth-child(2) {
+    width: 22%;
+}
+
+/* ===== Mon profil ===== */
+
+.btn-enregistrer {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 16px;
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-enregistrer:hover {
+    background: #cf3a26;
+}
+
+/* bandeau bleu avec les initiales */
+.bandeau {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding: 18px 22px;
+    background: var(--bleu);
+    color: #fff;
+    border-radius: 14px;
+}
+
+.bandeau .avatar {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: var(--orange);
+    border-radius: 50%;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.bandeau-identite {
+    flex: 1;
+}
+
+.bandeau-identite h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.bandeau-identite p {
+    margin-top: 4px;
+    font-size: 0.72rem;
+    opacity: 0.85;
+}
+
+.bandeau-stats {
+    display: flex;
+    gap: 28px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.bandeau-stats strong {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.bandeau-stats span {
+    font-size: 0.65rem;
+    opacity: 0.8;
+}
+
+/* formulaire à gauche, consentement et données à droite */
+.profil-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+    align-items: start;
+}
+
+.colonne-droite {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.page-profil .carte {
+    padding: 20px 22px;
+    background: #fff;
+    border: 1px solid var(--bordure);
+    border-radius: 12px;
+}
+
+.page-profil .carte-titre {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.titre-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #fdecea;
+    border-radius: 8px;
+}
+
+.grille {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 16px;
+}
+
+.pleine-largeur {
+    grid-column: 1 / -1;
+}
+
+.groupe label,
+.label-groupe {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.68rem;
+    font-weight: 600;
+}
+
+.champ {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 38px;
+    padding: 0 12px;
+    background: var(--champ);
+    border: 1px solid var(--bordure);
+    border-radius: 8px;
+    color: var(--gris);
+}
+
+.champ:focus-within {
+    border-color: var(--bleu);
+    background: #fff;
+}
+
+.champ input,
+.champ select {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--texte);
+    font-family: inherit;
+    font-size: 0.78rem;
+}
+
+.champ input:disabled {
+    color: var(--gris);
+}
+
+/* flèche du menu déroulant */
+.champ select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right center / 14px;
+}
+
+/* cases à cocher des langues */
+.liste-langues {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-top: 6px;
+}
+
+.groupe .case-langue {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 0;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* ligne mot de passe : champ + bouton */
+.ligne-mdp {
+    display: flex;
+    gap: 10px;
+}
+
+.ligne-mdp .champ {
+    flex: 1;
+}
+
+.btn-modifier {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 22px;
+    background: #fff;
+    color: var(--rouge);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid var(--rouge);
+    border-radius: 8px;
+}
+
+.btn-modifier:hover {
+    background: #fdf2f1;
+}
+
+/* date du dernier consentement */
+.signature {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    background: #dff3e7;
+    color: var(--vert);
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+/* boutons Télécharger / Supprimer */
+.btn-donnees {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 36px;
+    background: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-donnees + .btn-donnees {
+    margin-top: 10px;
+}
+
+.btn-telecharger {
+    color: var(--bleu);
+    border: 1px solid var(--bleu);
+}
+
+.btn-telecharger:hover {
+    background: #eef0fa;
+}
+
+.btn-supprimer {
+    color: var(--rouge);
+    border: 1px solid var(--rouge);
+}
+
+.btn-supprimer:hover {
+    background: #fdf2f1;
+}
+
+/* ===== Pop-up de suppression du compte (profil, sans JavaScript) ===== */
+
+/* on la centre nous-mêmes car * { margin: 0 } enlève le centrage automatique */
+.confirmation {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    height: fit-content;
+    width: calc(100% - 32px);
+    max-width: 440px;
+    padding: 28px;
+    color: var(--texte);
+    background: #fff;
+    border: none;
+    border-radius: 14px;
+}
+
+.confirmation::backdrop {
+    background: rgba(20, 27, 52, 0.55);
+}
+
+.confirmation h2 {
+    margin-bottom: 8px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.35;
+}
+
+.confirmation p {
+    margin-bottom: 22px;
+    color: var(--gris);
+    font-size: 0.78rem;
+}
+
+.actions-confirmation {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-retour {
+    flex: 1;
+    height: 42px;
+    background: #fff;
+    color: var(--texte);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--bordure);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-retour:hover {
+    border-color: var(--bleu);
+}
+
+/* les 2 boutons "Supprimer" sont l'un sur l'autre dans la même case */
+.zone-validation {
+    flex: 1;
+    display: grid;
+}
+
+.zone-validation > * {
+    grid-area: 1 / 1;
+}
+
+.btn-supprimer-final {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    background: #7b1e1e;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+}
+
+/* compte à rebours de 5 secondes, ensuite le vrai bouton apparaît */
+@property --sec {
+    syntax: "<integer>";
+    initial-value: 5;
+    inherits: false;
+}
+
+@keyframes decompte {
+    from {
+        --sec: 5;
+    }
+    to {
+        --sec: 0;
+    }
+}
+
+@keyframes disparait {
+    to {
+        visibility: hidden;
+    }
+}
+
+@keyframes apparait {
+    to {
+        visibility: visible;
+    }
+}
+
+/* faux bouton grisé avec le décompte */
+.attente {
+    opacity: 0.45;
+    cursor: not-allowed;
+    counter-reset: sec var(--sec);
+    animation: decompte 5s steps(5, jump-end) forwards, disparait 0s 5s forwards;
+}
+
+.attente::after {
+    content: " (" counter(sec) ")";
+    white-space: pre;
+}
+
+/* vrai bouton : caché pendant 5 secondes (on ne peut pas cliquer dessus) */
+.confirmer {
+    visibility: hidden;
+    cursor: pointer;
+    animation: apparait 0s 5s forwards;
+}
+
+.confirmer:hover {
+    background: #5e1515;
+}
+
+/* ===== Petits écrans ===== */
+
+@media (max-width: 900px) {
+    .accueil-layout,
+    .profil-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .bandeau {
+        flex-wrap: wrap;
+    }
+
+    .page-profil .page-header {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 700px) {
+    .page-experimentations .cartes,
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .rdv {
+        flex-wrap: wrap;
+    }
+
+    .rdv-infos {
+        min-width: 60%;
+    }
+}
+
+@media (max-width: 600px) {
+    .grille {
+        grid-template-columns: 1fr;
+    }
+}
