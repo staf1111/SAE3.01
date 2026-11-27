@@ -1,0 +1,126 @@
+/* Tableau de bord administrateur
+   (la plupart des styles viennent de pages.css : .card, .grid, .kpi, .tag, .btn, .list-row...) */
+
+/* étiquette rouge, absente de pages.css */
+.tag-red {
+  background: #fdecea;
+  color: #b91c1c;
+}
+
+/* lien "voir tout" à droite d'un titre */
+.voir-tout {
+  float: right;
+  color: var(--accent);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.voir-tout:hover {
+  text-decoration: underline;
+}
+
+/* ===== Accès rapides ===== */
+.bloc-raccourcis {
+  margin-bottom: 16px;
+}
+
+.raccourcis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.raccourci {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  color: #1a1d2e;
+  text-decoration: none;
+  background: #f3f5fa;
+  border: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.raccourci strong {
+  color: var(--navy);
+  font-size: 13px;
+}
+
+.raccourci:hover,
+.raccourci:focus-visible {
+  background: #fff;
+  border-color: var(--navy);
+  outline: none;
+}
+
+/* ===== Boutons ✔ / ✖ des demandes RGPD ===== */
+.actions-rgpd {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-icone {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+}
+
+/* ===== Boutons langue + mode nuit (comme la page profil) ===== */
+.tools {
+  align-items: center;
+}
+
+.langue-connexion {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  background: #fff;
+  color: #141B34;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #E2E5EE;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.night {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+  padding: 0;
+  background: #fff;
+  border: 1px solid #E2E5EE;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.icone,
+.icone-night {
+  width: 16px;
+  height: 16px;
+}
+
+.icone-fleche {
+  width: 12px;
+  height: 12px;
+}
+
+/* bouton "+ Créer un compte" à la même hauteur */
+.tools .btn-accent {
+  height: 32px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 800px) {
+  .raccourcis {
+    grid-template-columns: 1fr 1fr;
+  }
+}

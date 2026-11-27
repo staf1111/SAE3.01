@@ -14,7 +14,7 @@ class AuthController
 
     // page à ouvrir après la connexion, selon le rôle
     const PAGES_ACCUEIL = [
-        'admin' => 'accueil-admin',
+        'admin' => 'admin-dashboard',
         'enseignant' => 'dashboard',
         'participant' => 'accueil-participant',
     ];

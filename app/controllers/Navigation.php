@@ -47,13 +47,13 @@ $menus['enseignant'] = [
 ];
 
 $menus['admin'] = [
-    'dashboard' => ['label' => 'Tableau de bord', 'href' => '#', 'icon' => $icones['maison']],
-    'utilisateurs' => ['label' => 'Utilisateurs', 'href' => BASE_URL . '/index.php?c=administrateur&a=utilisateurs', 'icon' => $icones['utilisateurs']],
-    'parametres' => ['label' => 'Paramètres', 'href' => BASE_URL . '/index.php?c=administrateur&a=parametres', 'icon' => $icones['reglages']],
-    'journaux' => ['label' => 'Journaux', 'href' => BASE_URL . '/index.php?c=administrateur&a=journaux', 'icon' => $icones['journal']],
-    'statistiques' => ['label' => 'Statistiques', 'href' => BASE_URL . '/index.php?c=administrateur&a=statistiques', 'icon' => $icones['graphique']],
+    'dashboard' => ['label' => 'Tableau de bord', 'href' => lien('admin-dashboard'), 'icon' => $icones['maison']],
+    'utilisateurs' => ['label' => 'Utilisateurs', 'href' => BASE_URL . '/index.php?page=admin-utilisateurs', 'icon' => $icones['utilisateurs']],
+    'parametres' => ['label' => 'Paramètres', 'href' => BASE_URL . '/index.php?page=admin-parametres', 'icon' => $icones['reglages']],
+    'journaux' => ['label' => 'Journaux', 'href' => BASE_URL . '/index.php?page=admin-journaux', 'icon' => $icones['journal']],
+    'statistiques' => ['label' => 'Statistiques', 'href' => BASE_URL . '/index.php?page=admin-statistiques', 'icon' => $icones['graphique']],
     'messagerie' => $ongletMessagerie,
-    'profil' => ['label' => 'Mon profil', 'href' => BASE_URL . '/index.php?c=administrateur&a=profil', 'icon' => $icones['utilisateur']],
+    'profil' => ['label' => 'Mon profil', 'href' => BASE_URL . '/index.php?page=admin-profil', 'icon' => $icones['utilisateur']],
 ];
 
 return $menus;

@@ -272,4 +272,53 @@ class AdministrateurController
         $contentView = __DIR__ . '/../views/administrateur/admin_profil.php';
         require __DIR__ . '/../views/layout.php';
     }
+    public function dashboard(): void
+    {
+
+
+
+        $chiffres = [
+            ['valeur' => '1 284', 'texte' => 'Comptes actifs',              'detail' => '+57 ce mois',         'couleur' => 'green'],
+            ['valeur' => '17',    'texte' => 'Échecs de connexion (24 h)',  'detail' => '2 comptes bloqués',   'couleur' => 'red'],
+            ['valeur' => '12',    'texte' => 'Demandes RGPD à traiter',     'detail' => 'suppression / anonymisation', 'couleur' => 'red'],
+            ['valeur' => '6',     'texte' => 'Modèles globaux',             'detail' => "d'expérimentations",  'couleur' => ''],
+        ];
+
+
+        $raccourcis = [
+            ['titre' => 'Comptes utilisateurs',  'texte' => 'Créer, modifier ou supprimer un compte',   'lien' => BASE_URL . '/index.php?page=admin-utilisateurs'],
+            ['titre' => 'Rôles et permissions',  'texte' => 'Attribuer les rôles et régler les droits',  'lien' => BASE_URL . '/index.php?page=admin-utilisateurs#permissions'],
+            ['titre' => 'Paramètres',            'texte' => "Règles d'inscription, rétributions",        'lien' => BASE_URL . '/index.php?page=admin-parametres'],
+            ['titre' => 'Applications externes', 'texte' => 'Connexion à LimeSurvey',                    'lien' => BASE_URL . '/index.php?page=admin-parametres#limesurvey'],
+            ['titre' => "Journaux d'activité",   'texte' => 'Consulter les connexions et actions (logs)', 'lien' => BASE_URL . '/index.php?page=admin-journaux'],
+            ['titre' => 'Modèles globaux',       'texte' => "Gérer les modèles d'expérimentations",       'lien' => '#'],
+            ['titre' => 'Conformité RGPD',       'texte' => 'Consentements, anonymisation, archivage',    'lien' => '#rgpd'],
+            ['titre' => 'Statistiques',          'texte' => "Activité de l'application",                  'lien' => BASE_URL . '/index.php?page=admin-statistiques'],
+        ];
+
+
+        $demandesRgpd = [
+            ['nom' => 'Tom Nguyen',    'type' => 'Suppression du compte', 'date' => '25 nov.'],
+            ['nom' => 'Manon Laurent', 'type' => 'Anonymisation',         'date' => '24 nov.'],
+            ['nom' => 'Enzo David',    'type' => 'Suppression du compte', 'date' => '22 nov.'],
+        ];
+
+
+        $evenements = [
+            ['heure' => '08:31', 'texte' => 'tom.nguyen@exemple.fr : 5 mots de passe incorrects', 'etat' => 'Compte bloqué', 'couleur' => 'tag-red'],
+            ['heure' => '03:12', 'texte' => '185.220.101.7 : 12 tentatives « admin »',            'etat' => 'IP bloquée',    'couleur' => 'tag-red'],
+            ['heure' => '02:00', 'texte' => 'Anonymisation automatique de 4 comptes',            'etat' => 'Succès',        'couleur' => 'tag-green'],
+        ];
+
+
+        $modeles = [
+            ['titre' => 'Étude oculométrique standard',   'utilisations' => 8],
+            ['titre' => 'Test de perception auditive',    'utilisations' => 5],
+            ['titre' => 'Questionnaire de satisfaction',  'utilisations' => 12],
+        ];
+
+        $currentPage = 'dashboard';
+        $contentView = __DIR__ . '/../views/administrateur/admin_dashboard.php';
+        require __DIR__ . '/../views/layout.php';
+    }
 }

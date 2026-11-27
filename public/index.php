@@ -33,6 +33,7 @@ $routes = [
     'admin-parametres' => ['AdministrateurController', 'parametres', 'admin'],
     'admin-journaux' => ['AdministrateurController', 'journaux', 'admin'],
     'admin-profil' => ['AdministrateurController', 'profil', 'admin'],
+    'admin-dashboard' => ['AdministrateurController', 'dashboard', 'admin'],
 ];
 
 // sans ?page= dans l'URL : la page de connexion
